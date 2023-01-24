@@ -1,6 +1,7 @@
-Ezekiel Klenicki
-Gabriel Peer-Drake
-Kate Schwitz
+Group Members: 
+Ezekiel Klenicki,
+Gabriel Peer-Drake,
+Kate Schwitz,
 Walter Stahll
 
 "Free Time": A Social Calendar App
