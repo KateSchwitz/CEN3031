@@ -25,7 +25,7 @@ In the event that main.go will not run because of the packages listed in the imp
 
 ```
 go get go.mongodb.org/mongo-driver/mongo
-go.mongodb.org/mongo-driver/bson
+go get go.mongodb.org/mongo-driver/bson
 go get github.com/joho/godotenv
 ```
 
