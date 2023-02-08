@@ -17,3 +17,32 @@ Manual selection can be used to go through your Friends List and mark which peop
 Friends can be added with someone else’s username, so long as they accept your request. Specific accounts should be able to be blocked from sending requests.
 There could be a specific event type called “Free Time” that shows up on other people’s calendars (maybe only when the setting below is enabled). These kinds of events could be either public, hidden, or manually selected, but not private. (bc if you wanted private free time, why would you go out of your way to make an event for it?)
 Maybe your personal calendar can be set to only show Free Time (yours and others), to make it easier to determine which people you have overlapping Free Time with.
+
+##Backend Setup
+#Installing Packages
+
+In the event that main.go will not run because of the packages listed in the import section, delete "go.sum" and run the following commands in terminal while in the project directory:
+
+"go get go.mongodb.org/mongo-driver/mongo"
+"go.mongodb.org/mongo-driver/bson"
+"go get github.com/joho/godotenv"
+
+#Gaining server credentials
+
+To prevent anyone from forking the repo and gaining access to the server a .env file has been seperated and shared with the emails of contributors and can be accessed from this link:
+
+"https://drive.google.com/file/d/1gr3HSneNz5pxcidbdzGAvTGrjfwwbZTf/view?usp=sharing"
+
+Download and unzip the folder and place the .env file in the same folder as main.go. If the .env file is not visible, look online on how to view hidden files on your respective os (mac, windows10).
+
+#Whitelisting IP Address
+
+Send me (Gabe) your IP address or attempt to run main.go and form a connection with the database. From there I (Gabe) can manually whitelist an IP address when necessary.
+
+#Running the application
+
+navigate to the folder that contains main.go in your terminal and run the snippet:
+
+"go run main.go"
+
+You should recieve confirmation that a connection to the database has been made and that a server has successfully launched on localhost:8080
