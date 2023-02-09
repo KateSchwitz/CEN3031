@@ -1,1 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
+
+html {
+    background-color: rgba(226, 234, 225, 0.5);
+}
+
+:root {
+    --fc-border-color: black;
+    --fc-daygrid-event-dot-width: 5px;
+}
+
+.fc .fc-daygrid-day.fc-day-today {
+    background-color: rgba(122, 213, 104, 0.5) !important;
+}

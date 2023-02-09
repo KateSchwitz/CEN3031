@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CalendarOptions } from '@fullcalendar/core'; // useful for typechecking
 import dayGridPlugin from '@fullcalendar/daygrid';
+import interactionPlugin from '@fullcalendar/interaction';
 
 @Component({
   selector: 'app-root',
@@ -8,9 +9,21 @@ import dayGridPlugin from '@fullcalendar/daygrid';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'calendar';
+  title = 'FreeTime calendar';
+  events: any = [
+    {title: 'Meeting', date: '2023-02-02', color: '#00FF00'},
+    {title: 'Dinner', date: '2023-02-11', color: '#62F1F5'},
+    {title: 'Valentine\'s Day', date: '2023-02-14', color: '#FF0000'},
+    {title: 'Birthday', date: '2023-02-25', color: '#0000FF'}
+  ]
   calendarOptions: CalendarOptions = {
+    plugins: [
+      interactionPlugin,
+      dayGridPlugin
+    ],
     initialView: 'dayGridMonth',
-    plugins: [dayGridPlugin]
+    editable: true,
+    selectable: true,
+    events: this.events
   };
 }
