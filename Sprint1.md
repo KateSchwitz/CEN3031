@@ -44,3 +44,9 @@ Sprint 1:
 	.ics file?
 	Backend: setup database, with input from form
 	Frontend: display a week on a calendar, possibly adding an event
+
+Front End:
+The issues we planned to address were to display a working calendar and possibly the ability to add and remove events.
+We were able to succesfully display a working calendar, but adding and removing events can only be done through the code.
+We are still learning the basics of Angular, Typescript, and the Full Calendar library. We are also learning to make it look
+better on the actual website.
