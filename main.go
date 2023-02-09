@@ -110,7 +110,7 @@ func main() {
 	currentTime := time.Now() // gets the current time
 	startTime := time.Date(currentTime.Year(), time.March, 11, 0, 0, 0, 0, currentTime.Location())
 	endTime := time.Date(currentTime.Year(), time.March, 19, 23, 59, 59, 0, currentTime.Location())
-	newEvent := Event{EventName: "Spring Break", DTCreate: currentTime.Format("2006-01-02 15:04:05"), DTStart: startTime.Format("2006-01-02 15:04:05"), DTEnd: endTime.Format("2006-01-02 15:04:05"), CreatorName: "stahllw", CreatorID: "1", EventDesc: "2023 Spring Break! We have no school!"}
+	newEvent := Event{EventName: "Spring Break 2023", DTCreate: currentTime.Format("2006-01-02 15:04:05"), DTStart: startTime.Format("2006-01-02 15:04:05"), DTEnd: endTime.Format("2006-01-02 15:04:05"), CreatorName: "stahllw", CreatorID: "1", EventDesc: "2023 Spring Break! We have no school!"}
 	eventsCollection := client.Database("testing").Collection("events")
 	err = eventsCollection.Drop(context.TODO())
 	if err != nil {
