@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"fmt"
+	"html/template"
 	"net/http"
 	"os"
 
@@ -11,6 +12,27 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"golang.org/x/crypto/bcrypt"
 )
+
+var tpl2 *template.Template
+
+func indexHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("*****indexHandler running*****")
+	session, _ := store.Get(r, "session")
+	_, ok := session.Values["userID"]
+	fmt.Println("ok:", ok)
+	if !ok {
+		http.Redirect(w, r, "/login", http.StatusFound) // http.StatusFound is 302
+		return
+	}
+	var er2 error
+	tpl2, er2 = template.ParseGlob("src/app/index.html")
+
+	if er2 != nil {
+		fmt.Println("Parsing Templates Error:")
+		panic(er2.Error)
+	}
+	tpl2.ExecuteTemplate(w, "src/app/index.html", nil)
+}
 
 func loginHander(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("*****loginHandler Running*****")
@@ -54,11 +76,25 @@ func loginAuthHandler(w http.ResponseWriter, r *http.Request) {
 	// compare password with hash in db
 	err = bcrypt.CompareHashAndPassword([]byte(hash), []byte(password))
 	if err == nil {
-		fmt.Fprint(w, "You have successfully logged in")
+
+		session, _ := store.Get(r, "session")
+		session.Values["userID"] = username
+		session.Save(r, w)
+
+		tpl.ExecuteTemplate(w, "index.html", "Logged In")
 		return
 	}
 
 	// correct username and incorrect password sends back to login
 	fmt.Println("Incorrect password")
 	tpl.ExecuteTemplate(w, "login.html", "Please check username and password")
+}
+
+func logoutHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("*****logoutHandler running*****")
+	session, _ := store.Get(r, "session")
+
+	delete(session.Values, "userID")
+	session.Save(r, w)
+	tpl.ExecuteTemplate(w, "login.html", "logged out")
 }

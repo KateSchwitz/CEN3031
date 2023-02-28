@@ -10,6 +10,8 @@ import (
 
 	"time"
 
+	contextG "github.com/gorilla/context"
+	"github.com/gorilla/sessions"
 	"github.com/joho/godotenv"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
@@ -17,6 +19,8 @@ import (
 )
 
 var tpl *template.Template
+
+var store = sessions.NewCookieStore([]byte(os.Getenv("SESSION_KEY")))
 
 type Event struct {
 	EventName   string
@@ -75,15 +79,15 @@ func main() {
 	fmt.Println("Collection dropped successfully!")
 	insertEvent(eventsCollection, newEvent)
 
-	fileServer := http.FileServer(http.Dir("./static"))
-	http.Handle("/", fileServer)
 	http.HandleFunc("/register", registerHandler)
 	http.HandleFunc("/registerAuth", registerAuthHandler)
 	http.HandleFunc("/login", loginHander)
 	http.HandleFunc("/loginAuth", loginAuthHandler)
+	http.HandleFunc("/logout", logoutHandler)
+	http.HandleFunc("/", indexHandler)
 
 	fmt.Printf("Starting server at port 8080\n")
-	if err := http.ListenAndServe(":8080", nil); err != nil {
+	if err := http.ListenAndServe(":8080", contextG.ClearHandler(http.DefaultServeMux)); err != nil {
 		log.Fatal(err)
 	}
 }
