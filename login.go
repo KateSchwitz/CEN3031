@@ -3,7 +3,6 @@ package main
 import (
 	"context"
 	"fmt"
-	"html/template"
 	"net/http"
 	"os"
 
@@ -12,8 +11,6 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"golang.org/x/crypto/bcrypt"
 )
-
-var tpl2 *template.Template
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("*****indexHandler running*****")
@@ -24,14 +21,7 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 		http.Redirect(w, r, "/login", http.StatusFound) // http.StatusFound is 302
 		return
 	}
-	var er2 error
-	tpl2, er2 = template.ParseGlob("src/app/index.html")
-
-	if er2 != nil {
-		fmt.Println("Parsing Templates Error:")
-		panic(er2.Error)
-	}
-	tpl2.ExecuteTemplate(w, "src/app/index.html", nil)
+	tpl.ExecuteTemplate(w, "index.html", "Logged In")
 }
 
 func loginHander(w http.ResponseWriter, r *http.Request) {
@@ -94,7 +84,7 @@ func logoutHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("*****logoutHandler running*****")
 	session, _ := store.Get(r, "session")
 
-	delete(session.Values, "userID")
+	delete(session.Values, "username")
 	session.Save(r, w)
 	tpl.ExecuteTemplate(w, "login.html", "logged out")
 }
