@@ -20,12 +20,15 @@ import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { BsDatepickerModule, BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { BsDropdownModule,BsDropdownConfig } from 'ngx-bootstrap/dropdown';
 import { ModalModule, BsModalService } from 'ngx-bootstrap/modal';
+import { LoginPageComponent } from './loginPage/loginPage.component';
+import { RouterModule } from '@angular/router'; //THIS IS IMPORTANT FOR SWITCHING PAGES
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    CalendarComponent
+    CalendarComponent,
+    LoginPageComponent //FOR EACH PAGE CREATED, NEED TO DECLARE COMPONENTS
   ],
   imports: [
     BrowserModule,
@@ -41,7 +44,11 @@ import { ModalModule, BsModalService } from 'ngx-bootstrap/modal';
     CollapseModule,
     BsDatepickerModule.forRoot(),
     BsDropdownModule,
-    ModalModule
+    ModalModule, 
+    RouterModule.forRoot([ //THESE PATHS SHOULD EVENTUALLY SWTICH PAGES
+      {path: '/loginPage', component: LoginPageComponent},
+      {path: '', redirectTo: '/loginPage', pathMatch:'full'}
+    ])
   ],
   providers: [AlertConfig, BsDatepickerConfig, BsDropdownConfig,BsModalService],
   bootstrap: [AppComponent]

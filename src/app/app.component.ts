@@ -34,6 +34,7 @@ export class AppComponent implements OnInit{
   ngOnInit(): void {
   }
 
+  //to be worked on
   addEvent(){
     var event_name= document.getElementById("event_title")?.title;
     var event_color= document.getElementById("event_color");
@@ -42,5 +43,12 @@ export class AppComponent implements OnInit{
     this.events.push(obj1);
     this.modalRef?.hide();
   }
+
+  //this doesn't work yet, could be useful though
+  loginPage(){
+    window.location.href = "loginPage.component.html";
+
+  }
+
     
 }

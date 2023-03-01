@@ -1,9 +1,9 @@
-<div class="sidenav">
+  <div class="sidenav">
   <p>Free Time</p>
-  <a href="#">About</a>
-  <a href="#">Contact</a>
+  <!--  <a class= "button"routerLink="/loginPage" routerLinkActive="activebutton" ariaCurrentWhenActive="page">Login</a>  -->
   <button type="button" class="btn btn-primary" (click)="openModal(template)">New Event</button>
   <button type="button" class="btn btn-test" (click)="addEvent()">Add Event test</button>
+  <button type="button" class="btn btn-login" (click)="loginPage()">Login test</button>
 
 
   <ng-template #template>
@@ -38,8 +38,14 @@
         <button type="button" class="btn btn-submit" (click)="addEvent()">Save</button>
     </div>
   </ng-template>
+  <!-- THIS IS THE LOGIN PAGE COMPONENT-->
+  <app-loginPage></app-loginPage> 
+
 </div>
+<router-outlet></router-outlet>
+
 
 
   <!-- Full Calendar -->
   <full-calendar [options]="calendarOptions"></full-calendar>
+
