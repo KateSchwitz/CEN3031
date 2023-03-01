@@ -14,3 +14,7 @@ FRONTEND:
     - Add events via button
     - Navigation between pages
     
+    Progress videos:
+    https://youtu.be/ulztURZTP-I
+    
+    
