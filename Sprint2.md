@@ -28,8 +28,9 @@
 - Complete the integration of backend and frontend (95% complete)
 - Lock down event addition and deletion into the database from frontend
 
-Progress videos:
+# Progress videos:
 https://youtu.be/ulztURZTP-I
+https://youtu.be/meY56Wi_7FA
 
 # API Documentation
 The following endpoints are available:
