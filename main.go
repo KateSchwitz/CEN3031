@@ -79,8 +79,8 @@ func main() {
 	http.Handle("/", fileServer)
 	http.HandleFunc("/register", registerHandler)
 	http.HandleFunc("/registerAuth", registerAuthHandler)
-	http.HandleFunc("/login", loginHander)
-	http.HandleFunc("/loginAuth", loginAuthHandler)
+	http.HandleFunc("/login", loginHandler)
+	//http.HandleFunc("/loginAuth", loginAuthHandler)
 
 	fmt.Printf("Starting server at port 8080\n")
 	if err := http.ListenAndServe(":8080", nil); err != nil {
