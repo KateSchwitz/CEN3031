@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"net/http"
 	"os"
@@ -12,32 +13,44 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
+func requireLogin(next http.HandlerFunc) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		session, err := store.Get(r, "session")
+
+		if err != nil || !session.IsNew {
+			http.Redirect(w, r, "/login", http.StatusFound)
+			return
+		}
+
+		next.ServeHTTP(w, r)
+	}
+}
+
 func indexHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("*****indexHandler running*****")
-	session, _ := store.Get(r, "session")
-	_, ok := session.Values["userID"]
-	fmt.Println("ok:", ok)
-	if !ok {
-		http.Redirect(w, r, "/login", http.StatusFound) // http.StatusFound is 302
+	fmt.Printf("home page")
+}
+
+func loginHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("*****loginAuthHandler Running*****")
+
+	if r.Method != http.MethodPost {
+		http.Error(w, "Invalid request method", http.StatusMethodNotAllowed)
 		return
 	}
-	tpl.ExecuteTemplate(w, "index.html", "Logged In")
-}
 
-func loginHander(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("*****loginHandler Running*****")
-	tpl.ExecuteTemplate(w, "login.html", nil)
-}
+	var credentials struct {
+		Username string "json:'username'"
+		Password string "json:'password'"
+	}
 
-func loginAuthHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("*****loginAuthHandler Running*****")
-	r.ParseForm()
+	if err := json.NewDecoder(r.Body).Decode(&credentials); err != nil {
+		http.Error(w, "Invalid request body", http.StatusBadRequest)
+		return
+	}
 
-	username := r.FormValue("username")
-	password := r.FormValue("password")
-
-	fmt.Println("Username: ", username)
-	fmt.Println("Password: ", password)
+	fmt.Println("Username: ", credentials.Username)
+	fmt.Println("Password: ", credentials.Password)
 
 	uri := os.Getenv("MONGODB_URI")
 
@@ -45,7 +58,7 @@ func loginAuthHandler(w http.ResponseWriter, r *http.Request) {
 
 	usersCollection := client.Database("testing").Collection("register")
 
-	filter := bson.D{{"username", username}}
+	filter := bson.D{{"username", credentials.Username}}
 	cursor, err := usersCollection.Find(context.TODO(), filter)
 	if err != nil {
 		panic(err)
@@ -58,33 +71,41 @@ func loginAuthHandler(w http.ResponseWriter, r *http.Request) {
 
 	// if username is not registered send back to login
 	if len(results) == 0 {
-		tpl.ExecuteTemplate(w, "login.html", "Please check username and password")
+
+		http.Error(w, "Invalid credentials", http.StatusUnauthorized)
 		return
 	}
 	var hash string = results[0]["password"].(string)
 
 	// compare password with hash in db
-	err = bcrypt.CompareHashAndPassword([]byte(hash), []byte(password))
+	err = bcrypt.CompareHashAndPassword([]byte(hash), []byte(credentials.Password))
 	if err == nil {
 
 		session, _ := store.Get(r, "session")
-		session.Values["userID"] = username
+		session.Values["userID"] = credentials.Username
 		session.Save(r, w)
 
-		tpl.ExecuteTemplate(w, "index.html", "Logged In")
+		fmt.Fprint(w, "You have successfully logged in")
 		return
-	}
 
-	// correct username and incorrect password sends back to login
-	fmt.Println("Incorrect password")
-	tpl.ExecuteTemplate(w, "login.html", "Please check username and password")
+	} else {
+
+		http.Error(w, "Invalid credentials", http.StatusUnauthorized)
+	}
 }
 
 func logoutHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("*****logoutHandler running*****")
+
+	if r.Method != http.MethodPost {
+		http.Error(w, "Invalid request method - not post", http.StatusMethodNotAllowed)
+		return
+	}
+
 	session, _ := store.Get(r, "session")
 
 	delete(session.Values, "username")
 	session.Save(r, w)
-	tpl.ExecuteTemplate(w, "login.html", "logged out")
+
+	http.Redirect(w, r, "/login", http.StatusFound)
 }

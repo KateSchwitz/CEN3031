@@ -79,12 +79,11 @@ func main() {
 	fmt.Println("Collection dropped successfully!")
 	insertEvent(eventsCollection, newEvent)
 
+	http.HandleFunc("/test", requireLogin(indexHandler))
 	http.HandleFunc("/register", registerHandler)
-	http.HandleFunc("/registerAuth", registerAuthHandler)
-	http.HandleFunc("/login", loginHander)
-	http.HandleFunc("/loginAuth", loginAuthHandler)
+	http.HandleFunc("/login", loginHandler)
 	http.HandleFunc("/logout", logoutHandler)
-	http.HandleFunc("/", indexHandler)
+	//http.HandleFunc("/", indexHandler)
 
 	fmt.Printf("Starting server at port 8080\n")
 	if err := http.ListenAndServe(":8080", contextG.ClearHandler(http.DefaultServeMux)); err != nil {
