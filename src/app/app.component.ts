@@ -1,21 +1,18 @@
 import { Component } from '@angular/core';
-import { CalendarOptions } from '@fullcalendar/core'; // useful for typechecking
+import { CalendarOptions, EventInput } from '@fullcalendar/core'; // useful for typechecking
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
+import {OnInit, TemplateRef } from '@angular/core';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   title = 'FreeTime calendar';
-  events: any = [
-    {title: 'Meeting', date: '2023-02-02', color: '#00FF00'},
-    {title: 'Dinner', date: '2023-02-11', color: '#62F1F5'},
-    {title: 'Valentine\'s Day', date: '2023-02-14', color: '#FF0000'},
-    {title: 'Birthday', date: '2023-02-25', color: '#0000FF'}
-  ]
+  events:EventInput[] =[];
   calendarOptions: CalendarOptions = {
     plugins: [
       interactionPlugin,
@@ -26,4 +23,24 @@ export class AppComponent {
     selectable: true,
     events: this.events
   };
+  
+  modalRef?: BsModalRef;
+  constructor(private modalService: BsModalService) {}
+
+  openModal(template: TemplateRef<any>) {
+     this.modalRef = this.modalService.show(template);
+  }
+
+  ngOnInit(): void {
+  }
+
+  addEvent(){
+    var event_name= document.getElementById("event_title")?.title;
+    var event_color= document.getElementById("event_color");
+    var event_sDate= document.getElementById("event_sDate");
+    let obj1:EventInput ={title: "tests", date: '2023-02-28', color: '#33EF88'};
+    this.events.push(obj1);
+    this.modalRef?.hide();
+  }
+    
 }
