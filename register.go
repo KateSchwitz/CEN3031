@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"net/http"
 	"os"
@@ -14,24 +15,27 @@ import (
 )
 
 func registerHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("*****Register Handler Running*****")
-	tpl.ExecuteTemplate(w, "register.html", nil)
-}
-
-func registerAuthHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("*****RegisterAuthHandler Running*****")
 
-	// retrieve username and password from the form
-	r.ParseForm()
-	username := r.FormValue("username")
-	password := r.FormValue("password")
+	if r.Method != http.MethodPost {
+		http.Error(w, "Invalid request method", http.StatusMethodNotAllowed)
+		return
+	}
 
-	fmt.Println("username: ", username)
-	fmt.Println("password: ", password)
+	var credentials struct {
+		Username string "json:'username'"
+		Password string "json:'password'"
+	}
+	if err := json.NewDecoder(r.Body).Decode(&credentials); err != nil {
+		http.Error(w, "Invalid request body", http.StatusBadRequest)
+		return
+	}
+	println(credentials.Username)
+	println(credentials.Password)
 
 	// check if username is only alphanumeric characters
 	var alphaNumeric = true
-	for _, char := range username {
+	for _, char := range credentials.Username {
 		if unicode.IsNumber(char) == false && unicode.IsLetter(char) == false {
 			alphaNumeric = false
 		}
@@ -39,7 +43,7 @@ func registerAuthHandler(w http.ResponseWriter, r *http.Request) {
 
 	// check if username is appropriate length
 	var usernameLength bool
-	if 4 <= len(username) && 16 >= len(username) {
+	if 4 <= len(credentials.Username) && 16 >= len(credentials.Username) {
 		usernameLength = true
 	}
 	println("alphaNumeric: ", alphaNumeric)
@@ -48,7 +52,7 @@ func registerAuthHandler(w http.ResponseWriter, r *http.Request) {
 	var pswdLowerCase, pswdUpperCase, pswdNumber, pswdSpecialChar, pswdLength, pswdNoSpace bool
 	pswdNoSpace = true
 
-	for _, char := range password {
+	for _, char := range credentials.Password {
 		switch {
 		case unicode.IsLower(char): // check if password has a lowercase char
 			pswdLowerCase = true
@@ -65,13 +69,13 @@ func registerAuthHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// check if password is appropriate length
-	if 8 <= len(password) && 60 >= len(password) {
+	if 8 <= len(credentials.Password) && 60 >= len(credentials.Password) {
 		pswdLength = true
 	}
 
 	fmt.Println("pswdLowerCase: ", pswdLowerCase, "\npswdUpperCase: ", pswdUpperCase, "\npswdNumber: ", pswdNumber, "\npswdSpecialChar: ", pswdSpecialChar, "\npswdLength: ", pswdLength, "\npswdNoSpace: ", pswdNoSpace)
 	if !pswdLowerCase || !pswdUpperCase || !pswdNumber || !pswdSpecialChar || !pswdLength || !pswdNoSpace {
-		tpl.ExecuteTemplate(w, "register.html", "please check username and password criteria")
+		http.Error(w, "Invalid request body", http.StatusBadRequest)
 		return
 	}
 
@@ -82,7 +86,7 @@ func registerAuthHandler(w http.ResponseWriter, r *http.Request) {
 
 	usersCollection := client.Database("testing").Collection("register")
 
-	filter := bson.D{{"username", username}}
+	filter := bson.D{{"username", credentials.Username}}
 	cursor, err := usersCollection.Find(context.TODO(), filter)
 	if err != nil {
 		panic(err)
@@ -94,22 +98,23 @@ func registerAuthHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if len(results) > 0 {
-		tpl.ExecuteTemplate(w, "register.html", "the username you selected is already in use")
+		http.Error(w, "Selected username already in use", http.StatusConflict)
+
 		return
 	}
 
 	// create a hash for password
 	var hash []byte
-	hash, err = bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
+	hash, err = bcrypt.GenerateFromPassword([]byte(credentials.Password), bcrypt.DefaultCost)
 	if err != nil {
 		fmt.Println("bcrypt err:", err)
-		tpl.ExecuteTemplate(w, "register.html", "there was a problem registering account")
+		http.Error(w, "Invalid request body", http.StatusBadRequest)
 		return
 	}
 	fmt.Println("hash: ", hash)
 	fmt.Println("string(hash): ", string(hash))
 
-	user := bson.D{{"username", username}, {"password", string(hash)}}
+	user := bson.D{{"username", credentials.Username}, {"password", string(hash)}}
 
 	// insert username and str(hash) into database
 	result, err := usersCollection.InsertOne(context.TODO(), user)
