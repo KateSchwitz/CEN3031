@@ -1,21 +1,35 @@
-FRONTEND:
+# FRONTEND:
 
-   Accomplished:
-    - Set up loginPage component to prepare for page routing
-    - Created basic Cypress test for loginPage component
-         ==========================================================
-         Pass unit test of incrementing/decrementing Event Counter
-         Input of username/password and clicking Save button
-         ==========================================================
-   In progress:
-    - Pop-up bootstrap modal upon "Add Event" button click
-    - Properly set up page routing between calendar and login components
-   To Do for Sprint 3: 
-    - Add events via button
-    - Navigation between pages
-    
-    Progress videos:
-    https://youtu.be/ulztURZTP-I
+## Accomplished:
+- Set up loginPage component to prepare for page routing
+- Created basic Cypress test for loginPage component
+      Pass unit test of incrementing/decrementing Event Counter
+      Input of username/password and clicking Save button
+
+## In progress:
+- Pop-up bootstrap modal upon "Add Event" button click
+- Properly set up page routing between calendar and login components
+
+## To Do for Sprint 3: 
+- Add events via button
+- Navigation between pages
+
+# BACKEND:
+
+## Accomplished:
+- Realized that handler function setup performed for sprint 1 was incompatable with frontend.
+- Restructured handler function to behave more closeley with REST behaviors
+- Began adding session functionality (keeping users logged in, restricting access to non-logged-in users)
+## In progress:
+- Add event functionality to api
+- Standardizing and implimenting error codes in an effective way
+- Determine and impliment routing between pages
+## To Do for Sprint 3:
+- Complete the integration of backend and frontend (95% complete)
+- Lock down event addition and deletion into the database from frontend
+
+Progress videos:
+https://youtu.be/ulztURZTP-I
 
 # API Documentation
 The following endpoints are available:
@@ -82,4 +96,13 @@ And here's an example of a successful response:
 HTTP/1.1 200 OK
 Set-Cookie: session-key=abc123; Path=/; HttpOnly
 ```
+# Backend Tests
+Backend tests can be found in unit_tests.go in the main folder
 
+## Currently supported:
+- /login
+- /register
+- /about
+
+Tests see if expected output is returned based on input e.g. login should return http.StatusOK.
+Currently tests are not completely working because of an issue with mongodb, however they are able to recieve input and use it, which should indicate that the body of loginHandler, registerHandler and aboutHandler are otherwise working. Postman testing confirms this.
