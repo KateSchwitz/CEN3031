@@ -5,6 +5,7 @@
 - Created basic Cypress test for loginPage component
       Pass unit test of incrementing/decrementing Event Counter
       Input of username/password and clicking Save button
+- Beginning of full merge with back-end.
 
 ## In progress:
 - Pop-up bootstrap modal upon "Add Event" button click
@@ -12,6 +13,7 @@
 
 ## To Do for Sprint 3: 
 - Add events via button
+- Fully connect with Back-End and have multiple pages with login, sign up, and calendar.
 - Navigation between pages
 
 # BACKEND:
@@ -32,6 +34,8 @@
 https://youtu.be/ulztURZTP-I
 
 https://youtu.be/meY56Wi_7FA
+
+https://youtu.be/8yPqxIyiReA
 
 # API Documentation
 The following endpoints are available:
