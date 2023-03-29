@@ -1,2 +1,57 @@
+
 <h1>Hello</h1>
 <p>Home Works!!</p>
+
+
+
+<button type="button" class="btn btn-primary" (click)="openModal(template)">Open modal</button>
+
+
+<ng-template #template>
+    <div class="modal-header">
+       <h4 class="modal-title pull-left">Modal</h4>
+       <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+          <span aria-hidden="true">×</span>
+       </button>
+    </div>
+    <div class="modal-body">
+       This is a sample modal dialog box.
+    </div>
+    <div class="modal-footer">
+       <button type="button" class="btn btn-default" (click)="modalRef?.hide()">Close</button>
+    </div>
+ </ng-template>
+
+<ng-template #template>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Edit Event</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+          <span aria-hidden="true">×</span>
+        </button>
+    </div>
+    <div class="modal-body">
+      <form action = "/addEvent" method = "POST">
+      <div class="form-group">
+        <label for="">Enter Name</label>
+        <input type ="text" class = "form-control" name = "title" id="event_title" placeholder="Enter Name">
+      </div>
+      <div class="form-group">
+        <label for="">Set Color</label>
+        <input type ="color" class = "form-control" name = "color" id="event_color">
+      </div>
+      <div class="form-group">
+        <label for="">Start Date</label>
+        <input type ="datetime-local" class = "form-control" name = "start_date" id="event_sDate" placeholder="Enter Start Date">
+      </div>
+      <div class="form-group">
+        <label for="">End Date</label>
+        <input type ="datetime-local" class = "form-control" name = "end_date" id="event_eDate" placeholder="Enter End Date">
+      </div>
+    </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" (click)="modalRef?.hide()">Close</button>
+        <button type="button" class="btn btn-submit" (click)="addEvent()">Save</button>
+    </div>
+  </ng-template>
+    
