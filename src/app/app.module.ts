@@ -1,8 +1,12 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FullCalendarModule } from '@fullcalendar/angular';
+import { HttpClientModule } from '@angular/common/http';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
+
+//Routing imports
+import { Routes } from '@angular/router';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -21,18 +25,23 @@ import { BsDatepickerModule, BsDatepickerConfig } from 'ngx-bootstrap/datepicker
 import { BsDropdownModule,BsDropdownConfig } from 'ngx-bootstrap/dropdown';
 import { ModalModule, BsModalService } from 'ngx-bootstrap/modal';
 import { LoginPageComponent } from './loginPage/loginPage.component';
-import { RouterModule } from '@angular/router'; //THIS IS IMPORTANT FOR SWITCHING PAGES
+import { RouterModule } from '@angular/router';
+import { HomeComponent } from './home/home.component'; //THIS IS IMPORTANT FOR SWITCHING PAGES
 
+const routes: Routes = [
+]
 
 @NgModule({
   declarations: [
     AppComponent,
     CalendarComponent,
-    LoginPageComponent //FOR EACH PAGE CREATED, NEED TO DECLARE COMPONENTS
+    LoginPageComponent,
+    HomeComponent //FOR EACH PAGE CREATED, NEED TO DECLARE COMPONENTS
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     FullCalendarModule,
     CommonModule, BrowserAnimationsModule,
     BootstrapModule, ModalModule.forRoot(),
@@ -48,9 +57,10 @@ import { RouterModule } from '@angular/router'; //THIS IS IMPORTANT FOR SWITCHIN
     RouterModule.forRoot([ //THESE PATHS SHOULD EVENTUALLY SWTICH PAGES
       {path: '/loginPage', component: LoginPageComponent},
       {path: '', redirectTo: '/loginPage', pathMatch:'full'}
-    ])
+    ]),
   ],
   providers: [AlertConfig, BsDatepickerConfig, BsDropdownConfig,BsModalService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
+
 export class AppModule { }

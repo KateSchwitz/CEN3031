@@ -12,8 +12,9 @@
 
   <!-- THIS IS THE LOGIN PAGE COMPONENT-->
   <div>
-    <app-loginPage></app-loginPage> 
+    <app-loginPage></app-loginPage>
   </div>
+  
   <ng-template #template>
     <div class="modal-header">
         <h4 class="modal-title pull-left">Edit Event</h4>
@@ -49,10 +50,8 @@
 
 
 </div>
+
+<!-- Full Calendar -->
+<full-calendar [options]="calendarOptions"></full-calendar>
+
 <router-outlet></router-outlet>
-
-
-
-  <!-- Full Calendar -->
-  <full-calendar [options]="calendarOptions"></full-calendar>
-
