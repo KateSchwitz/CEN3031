@@ -24,6 +24,7 @@ import { ModalModule, BsModalService } from 'ngx-bootstrap/modal';
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full'},
+  {path: 'login', component:LoginPageComponent}
 ]
 
 @NgModule({
