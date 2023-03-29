@@ -1,34 +1,29 @@
+//Angular
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { FullCalendarModule } from '@fullcalendar/angular';
 import { HttpClientModule } from '@angular/common/http';
-import dayGridPlugin from '@fullcalendar/daygrid';
-import interactionPlugin from '@fullcalendar/interaction';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-//Routing imports
+//Angular Routing
+import { RouterModule } from '@angular/router';
 import { Routes } from '@angular/router';
 
-import { AppRoutingModule } from './app-routing.module';
+//Components
 import { AppComponent } from './app.component';
+import { HomeComponent } from './home/home.component';
 import { CalendarComponent } from './calendar/calendar.component';
-
-import { CommonModule } from '@angular/common';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { BootstrapModule } from './bootstrap.module';
-import { AccordionModule } from 'ngx-bootstrap/accordion';
-import { AlertModule,AlertConfig } from 'ngx-bootstrap/alert';
-import { ButtonsModule } from 'ngx-bootstrap/buttons';
-import { FormsModule } from '@angular/forms';
-import { CarouselModule } from 'ngx-bootstrap/carousel';
-import { CollapseModule } from 'ngx-bootstrap/collapse';
-import { BsDatepickerModule, BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
-import { BsDropdownModule,BsDropdownConfig } from 'ngx-bootstrap/dropdown';
-import { ModalModule, BsModalService } from 'ngx-bootstrap/modal';
 import { LoginPageComponent } from './loginPage/loginPage.component';
-import { RouterModule } from '@angular/router';
-import { HomeComponent } from './home/home.component'; //THIS IS IMPORTANT FOR SWITCHING PAGES
+
+//FullCalendar
+import { FullCalendarModule } from '@fullcalendar/angular';
+
+//Bootstrap
+import { ModalModule, BsModalService } from 'ngx-bootstrap/modal';
+
+
 
 const routes: Routes = [
+  { path: 'home', component: HomeComponent },
+  { path: '', redirectTo: '/home', pathMatch: 'full'},
 ]
 
 @NgModule({
@@ -36,30 +31,16 @@ const routes: Routes = [
     AppComponent,
     CalendarComponent,
     LoginPageComponent,
-    HomeComponent //FOR EACH PAGE CREATED, NEED TO DECLARE COMPONENTS
+    HomeComponent
+    //FOR EACH PAGE CREATED, NEED TO DECLARE COMPONENTS
   ],
   imports: [
-    BrowserModule,
-    AppRoutingModule,
     HttpClientModule,
     FullCalendarModule,
-    CommonModule, BrowserAnimationsModule,
-    BootstrapModule, ModalModule.forRoot(),
-    AccordionModule,
-    AlertModule,
-    ButtonsModule,
-    FormsModule,
-    CarouselModule,
-    CollapseModule,
-    BsDatepickerModule.forRoot(),
-    BsDropdownModule,
-    ModalModule, 
-    RouterModule.forRoot([ //THESE PATHS SHOULD EVENTUALLY SWTICH PAGES
-      {path: '/loginPage', component: LoginPageComponent},
-      {path: '', redirectTo: '/loginPage', pathMatch:'full'}
-    ]),
+    BrowserAnimationsModule,
+    RouterModule.forRoot(routes),
   ],
-  providers: [AlertConfig, BsDatepickerConfig, BsDropdownConfig,BsModalService],
+  providers: [BsModalService],
   bootstrap: [AppComponent],
 })
 

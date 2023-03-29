@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, VERSION } from '@angular/core';
 import { CalendarOptions, EventInput } from '@fullcalendar/core'; // useful for typechecking
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
@@ -12,7 +12,7 @@ import { HttpClient } from '@angular/common/http'
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
-  title = 'FreeTime calendar';
+  title = 'FreeTime Calendar';
   events:EventInput[] =[];
   calendarOptions: CalendarOptions = {
     plugins: [
