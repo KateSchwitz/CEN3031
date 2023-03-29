@@ -26,9 +26,16 @@ func requireLogin(next http.HandlerFunc) http.HandlerFunc {
 	}
 }
 
-func indexHandler(w http.ResponseWriter, r *http.Request) {
+func aboutHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("*****indexHandler running*****")
-	fmt.Printf("home page")
+
+	info := map[string]string{
+		"name":    "My Application",
+		"version": "1.0",
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(info)
 }
 
 func loginHandler(w http.ResponseWriter, r *http.Request) {
@@ -55,6 +62,9 @@ func loginHandler(w http.ResponseWriter, r *http.Request) {
 	uri := os.Getenv("MONGODB_URI")
 
 	client, err := mongo.Connect(context.TODO(), options.Client().ApplyURI(uri))
+	if err != nil {
+		panic(err)
+	}
 
 	usersCollection := client.Database("testing").Collection("register")
 
@@ -104,7 +114,7 @@ func logoutHandler(w http.ResponseWriter, r *http.Request) {
 
 	session, _ := store.Get(r, "session")
 
-	delete(session.Values, "username")
+	delete(session.Values, "userID")
 	session.Save(r, w)
 
 	http.Redirect(w, r, "/login", http.StatusFound)

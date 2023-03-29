@@ -124,4 +124,5 @@ func registerHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println(result.InsertedID)
 
 	fmt.Fprint(w, "Your account has been successfully created")
+
 }

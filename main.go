@@ -22,23 +22,7 @@ var tpl *template.Template
 
 var store = sessions.NewCookieStore([]byte(os.Getenv("SESSION_KEY")))
 
-type Event struct {
-	EventName   string
-	DTCreate    string // Date & Time that Event was created
-	DTStart     string // Date & Time that Event is scheduled to start
-	DTEnd       string // Date & Time that Event is scheduled to end
-	CreatorName string // Event Creator's ID
-	CreatorID   string // Event Creator's ID
-	EventDesc   string // Event Description
-}
 
-func insertEvent(collection *mongo.Collection, newEvent Event) {
-	insertResult, err := collection.InsertOne(context.TODO(), newEvent)
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Println("Inserted a single document:", insertResult.InsertedID)
-}
 
 func main() {
 	var err error
@@ -79,7 +63,7 @@ func main() {
 	fmt.Println("Collection dropped successfully!")
 	insertEvent(eventsCollection, newEvent)
 
-	http.HandleFunc("/test", requireLogin(indexHandler))
+	http.HandleFunc("/about", requireLogin(aboutHandler))
 	http.HandleFunc("/register", registerHandler)
 	http.HandleFunc("/login", loginHandler)
 	http.HandleFunc("/logout", logoutHandler)
