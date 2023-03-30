@@ -16,7 +16,6 @@ import { LoginPageComponent } from './loginPage/loginPage.component';
 
 //FullCalendar
 import { FullCalendarModule } from '@fullcalendar/angular';
-import { FullCalendarComponent } from '@fullcalendar/angular';
 
 //Bootstrap
 import { ModalModule, BsModalService } from 'ngx-bootstrap/modal';
@@ -42,7 +41,6 @@ const routes: Routes = [
     HttpClientModule,
     BrowserModule,
     FullCalendarModule,
-    FullCalendarComponent,
     BrowserAnimationsModule,
     RouterModule.forRoot(routes),
   ],
