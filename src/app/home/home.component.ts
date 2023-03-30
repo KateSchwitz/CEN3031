@@ -15,7 +15,8 @@ export class HomeComponent implements OnInit{
      this.modalRef = this.modalService.show(template);
   }
   addEvent(){
-
+    //requires logic here to link back and front end
+      this.modalRef?.hide();
   }
   ngOnInit() {
     
