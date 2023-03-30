@@ -1,7 +1,7 @@
 
 /* The sidebar menu */
 .sidenav {
-    height: 100%; /* Full-height: remove this if you want "auto" height */
+    /*height: 100%; Full-height: remove this if you want "auto" height */
     width: 160px; /* Set the width of the sidebar */
     position: fixed; /* Fixed Sidebar (stay in place on scroll) */
     z-index: 1; /* Stay on top */
@@ -17,6 +17,7 @@
     text-align: center;
     text-decoration: none;
     font-size: 25px;
+    font-family: 'Gill Sans';
     color: #04182e;
     display: block;
   }
@@ -28,12 +29,14 @@
   .sidenav p{
     color: #f1f1f1;
     font-size: 40px;
+    font-family: 'Gill Sans';
     padding-left: 20px;
   }
   
   .sidenav a.title{
     color:#f1f1f1;
     font-size: 40px;
+    font-family: 'Gill Sans';
     text-align: left;
     padding-left: 25px;
   }
@@ -46,11 +49,13 @@
     background:#bddbfa;
     
     border: 1px solid #dcdcdc;
+    border-radius: 4px;
     display: inline-block;
     cursor: pointer;
     color: #16075a;
     font-size: 16px;
     font-weight: bold;
+    font-family: 'Gill Sans';
     padding: 6px 6px;
     text-decoration: none;
     outline: 0;
@@ -66,4 +71,16 @@
   background: #8ec3f9;
   border: 1px solid #84bbf3;
   color: #ffffff;
+}
+
+.fc-col-header-cell-cushion {
+  display: inline-block;
+  padding: 2px 4px;
+  color: #16075a;
+  font-family: 'Gill Sans';
+}
+
+.fc-title{
+  color: #16075a;
+  font-family: 'Gill Sans';
 }

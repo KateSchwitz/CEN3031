@@ -1,0 +1,27 @@
+h1{
+    font-family: 'Gill Sans';
+    font-size: 30px;
+    color: #f1f1f1;
+    padding-left: 20px;
+}
+
+p{
+    font-family: 'Gill Sans';
+    font-size: 20px;
+    color: #f1f1f1;
+    padding-left: 20px;
+}
+
+button{
+    background-color: #f1f1f1;
+    color: #16075a;
+    font-size: 16px;
+    font-weight: bold;
+    font-family: 'Gill Sans';
+    padding: 6px 6px;
+
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
