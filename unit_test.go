@@ -75,7 +75,7 @@ func TestRegisterHandler(t *testing.T) {
 	defer ts.Close()
 
 	// create a JSON payload with the user's desired username and password
-	payload := []byte(`{"username": "Testuser2", "password": "Testpass123!"}`)
+	payload := []byte(`{"username": "Testuser4", "password": "Testpass123!"}`)
 
 	// create a new POST request with the payload
 	req, err := http.NewRequest("POST", ts.URL+"/register", bytes.NewBuffer(payload))
@@ -113,6 +113,24 @@ func TestAddEventRaw(t *testing.T) {
 
 	if rr.Code != http.StatusOK {
 		t.Errorf("expected status %d but got %d", http.StatusOK, rr.Code)
+	}
+
+}
+
+func TestDeleteEvent(t *testing.T) {
+	reqBody := []byte(`{"title":"Unit Test","color":"Blue","start_date":"02.01.02","end_date":"02.01.02"}`)
+	req, err := http.NewRequest("DELETE", "/deleteEvent", bytes.NewBuffer(reqBody))
+	if err != nil {
+		t.Fatal(err)
+	}
+	rr := httptest.NewRecorder()
+
+	handler := http.HandlerFunc(deleteEventHandler)
+
+	handler.ServeHTTP(rr, req)
+
+	if rr.Code != http.StatusNoContent {
+		t.Errorf("expected status %d but got %d", http.StatusNoContent, rr.Code)
 	}
 
 }

@@ -2,12 +2,15 @@ package main
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
 	"os"
 
 	"time"
+
+	"go.mongodb.org/mongo-driver/bson"
 
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
@@ -33,26 +36,50 @@ func insertEvent(collection *mongo.Collection, newEvent Event) {
 	fmt.Println("Inserted a single document:", insertResult.InsertedID)
 }
 
-func eventHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("*****eventHandler Running*****")
-	tpl.ExecuteTemplate(w, "app.component.html", nil)
+// clears all events from the Events collection on the MongoDB database
+func clearEvents(w http.ResponseWriter, r *http.Request) {
+	uri := os.Getenv("MONGODB_URI")
+
+	client, err := mongo.Connect(context.TODO(), options.Client().ApplyURI(uri))
+	if err != nil {
+		panic(err)
+	}
+
+	eventsCollection := client.Database("testing").Collection("events")
+	err = eventsCollection.Drop(context.TODO())
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	fmt.Println("Collection dropped successfully!")
 }
 
-func eventAuthHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("*****eventAuthHandler Running*****")
-	r.ParseForm()
+// Creates a new event in the Events collection Post request with form-urlencoded body
+func eventHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("*****eventHandler Running*****")
+
+	err := r.ParseForm()
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
 
 	title := r.FormValue("title")
 	color := r.FormValue("color")
+	start_date := r.FormValue("start_date")
+	end_date := r.FormValue("end_date")
+	println(title)
+	println(color)
+	println(start_date)
+	println(end_date)
+
 	ct := time.Now()
-	start := r.FormValue("start_date")
-	end := r.FormValue("end_date")
 	creatorName := "placeholderName"
 	creatorID := "placeholderID"
 	eventDesc := "This is a placeholder for an event description."
 
 	newEvent := Event{EventName: title, Color: color, DTCreate: ct.Format("2006-01-02 15:04"),
-		DTStart: start, DTEnd: end, CreatorName: creatorName, CreatorID: creatorID, EventDesc: eventDesc}
+		DTStart: start_date, DTEnd: end_date, CreatorName: creatorName, CreatorID: creatorID, EventDesc: eventDesc}
 
 	uri := os.Getenv("MONGODB_URI")
 
@@ -64,4 +91,100 @@ func eventAuthHandler(w http.ResponseWriter, r *http.Request) {
 	usersCollection := client.Database("testing").Collection("events")
 
 	insertEvent(usersCollection, newEvent)
+}
+
+// Creates a new event in the Events collection Post request with raw body
+func eventHandlerRaw(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("*****eventHandlerRaw Running*****")
+
+	if r.Method != http.MethodPost {
+		http.Error(w, "Invalid request method", http.StatusMethodNotAllowed)
+		println("method not allowed")
+		return
+	}
+
+	var event struct {
+		Title      string "json:'title'"
+		Color      string "json:'color'"
+		Start_date string "json:'start_date'"
+		End_date   string "json:'end_date'"
+	}
+	if err := json.NewDecoder(r.Body).Decode(&event); err != nil {
+		http.Error(w, "Invalid request body", http.StatusBadRequest)
+		println("bad request")
+		return
+	}
+	println(event.Title)
+	println(event.Color)
+	println(event.Start_date)
+	println(event.End_date)
+
+	ct := time.Now()
+	creatorName := "placeholderName"
+	creatorID := "placeholderID"
+	eventDesc := "This is a placeholder for an event description."
+
+	newEvent := Event{EventName: event.Title, Color: event.Color, DTCreate: ct.Format("2006-01-02 15:04"),
+		DTStart: event.Start_date, DTEnd: event.End_date, CreatorName: creatorName, CreatorID: creatorID, EventDesc: eventDesc}
+
+	uri := "mongodb+srv://project_group_5:XbDuA0Vid6BnuRY7@cluster0.5ch00jt.mongodb.net/?retryWrites=true&w=majority" //os.Getenv("MONGODB_URI")
+
+	client, err := mongo.Connect(context.TODO(), options.Client().ApplyURI(uri))
+	if err != nil {
+		panic(err)
+	}
+
+	usersCollection := client.Database("testing").Collection("events")
+
+	insertEvent(usersCollection, newEvent)
+}
+
+func deleteEventHandler(w http.ResponseWriter, r *http.Request) {
+
+	if r.Method != http.MethodDelete {
+		http.Error(w, "Invalid request method", http.StatusMethodNotAllowed)
+		println("method not allowed")
+		return
+	}
+
+	var event struct {
+		Title      string "json:'title'"
+		Color      string "json:'color'"
+		Start_date string "json:'start_date'"
+		End_date   string "json:'end_date'"
+	}
+
+	if err := json.NewDecoder(r.Body).Decode(&event); err != nil {
+		http.Error(w, "Invalid request body", http.StatusBadRequest)
+		println("bad request")
+		return
+	}
+
+	println(event.Title)
+	println(event.Color)
+	println(event.Start_date)
+	println(event.End_date)
+
+	uri := "mongodb+srv://project_group_5:XbDuA0Vid6BnuRY7@cluster0.5ch00jt.mongodb.net/?retryWrites=true&w=majority" //os.Getenv("MONGODB_URI")
+
+	client, err := mongo.Connect(context.TODO(), options.Client().ApplyURI(uri))
+	if err != nil {
+		panic(err)
+	}
+
+	usersCollection := client.Database("testing").Collection("events")
+
+	filter := bson.D{{"eventname", event.Title}, {"color", event.Color}, {"dtstart", event.Start_date}, {"dtend", event.Start_date}}
+
+	result, err := usersCollection.DeleteOne(context.Background(), filter)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	if result.DeletedCount == 1 {
+		w.WriteHeader(http.StatusNoContent)
+	} else {
+		w.WriteHeader(http.StatusNotFound)
+	}
+
 }
