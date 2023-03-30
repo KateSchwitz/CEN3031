@@ -1,0 +1,21 @@
+
+<h2>Login</h2>
+<p>Event Counter</p> <br>
+<div>
+    <button data-cy="decrement" (click)="decrement()">-</button>
+    <span data-cy="counter">{{ count }}</span>
+    <button data-cy="increment" (click)="increment()">+</button>
+</div>
+<br>
+
+<label>Username:</label>
+<br> 
+<input name = "username" type = "text" value = "" />
+<br>
+
+<label>Password:</label>
+<br>
+<input name = "password" type = "text" value = "" /> <br>
+
+<button title="save" (click)="save()">Save</button>
+
