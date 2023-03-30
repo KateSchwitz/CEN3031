@@ -16,20 +16,48 @@
 The following endpoints are available in addition to those presented in Sprint2.md
 
 ## 'DELETE /deleteEvent'
-This endpoint is used to delete an event from the database collection using filtered components
+This endpoint is used to delete an event from the database collection using filtered components.
 
 ### Request Parameters
 |Parameter|type|Required|Description|
 |---|---|---|---|
 |'title'|string|yes|The name of the event|
-|'color'|string|yes|The color of the displayed event|
-|'start_date'|string|yes|The start date of the event|
-|'end_date'|string|yes|The end date of the event|
+|'color'|string|yes|The color of the displayed event ("#000000)|
+|'start_date'|string|yes|The start date of the event ("YYYY-MM-DDTHH:MM")|
+|'end_date'|string|yes|The end date of the event ("YYYY-MM-DDTHH:MM")|
 
 ### Response
 If the deletion attempt is successful, the server responds with a status code of '204 NO CONTENT'.
 
 If the deletion attempt fails due to the event not existing in the database, the server responds with a status code of '404 NOT FOUND'
+
+## 'POST /addEvent'
+This endpoint is used to add an event to the database collection using a POST request with a form-urlencoded body.
+
+### Request Parameters
+|Parameter|type|Required|Description|
+|---|---|---|---|
+|'title'|string|yes|The name of the event|
+|'color'|string|yes|The color of the displayed event ("#000000)|
+|'start_date'|string|yes|The start date of the event ("YYYY-MM-DDTHH:MM")|
+|'end_date'|string|yes|The end date of the event ("YYYY-MM-DDTHH:MM")|
+
+### Response
+If the insertion attempt is successful, the server responds with a status code of '200 OK'.
+
+## 'POST /addEventRaw'
+This endpoint is used to add an event to the database collection using a POST request with a raw body.
+
+### Request Parameters
+|Parameter|type|Required|Description|
+|---|---|---|---|
+|'title'|string|yes|The name of the event|
+|'color'|string|yes|The color of the displayed event ("#000000)|
+|'start_date'|string|yes|The start date of the event ("YYYY-MM-DDTHH:MM")|
+|'end_date'|string|yes|The end date of the event ("YYYY-MM-DDTHH:MM")|
+
+### Response
+If the insertion attempt is successful, the server responds with a status code of '200 OK'.
 
 # Backend Tests
 Backend tests can be found in unit_tests.go in the main folder
@@ -39,7 +67,6 @@ Backend tests can be found in unit_tests.go in the main folder
 - /register
 - /addEventRaw
 - /deleteEvent
-- /test (ensures that a non-logged in user will be redirected to the login page)
 
 Tests see if expected output is returned based on input e.g. login should return http.StatusOK.
 Currently tests are now completely working because the issue with mongodb has been resolved
