@@ -39,6 +39,7 @@ Backend tests can be found in unit_tests.go in the main folder
 - /register
 - /addEventRaw
 - /deleteEvent
+- /test (ensures that a non-logged in user will be redirected to the login page)
 
 Tests see if expected output is returned based on input e.g. login should return http.StatusOK.
 Currently tests are now completely working because the issue with mongodb has been resolved

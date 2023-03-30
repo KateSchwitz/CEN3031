@@ -31,7 +31,6 @@ func TestLoginHandler(t *testing.T) {
 	}
 }
 
-/*
 func TestAboutEndpoint(t *testing.T) {
 	// Create a new HTTP request to the about endpoint
 	req, err := http.NewRequest("GET", "/about", nil)
@@ -43,25 +42,21 @@ func TestAboutEndpoint(t *testing.T) {
 	rr := httptest.NewRecorder()
 
 	// Set the session cookie in the request to simulate a logged-in user
-	cookie := &http.Cookie{Name: "session-key", Value: "12345"}
+	cookie := &http.Cookie{Name: "session", Value: "Gabe"}
 	req.AddCookie(cookie)
 
 	// Call the aboutHandler function with the HTTP request and response recorder
-	handler := http.HandlerFunc(aboutHandler)
+	handler := http.HandlerFunc(requireLogin(indexHandler))
 	handler.ServeHTTP(rr, req)
 
 	// Check that the response status code is 200 OK
-	if status := rr.Code; status != http.StatusOK {
-		t.Errorf("handler returned wrong status code: got %v want %v", status, http.StatusOK)
+	if status := rr.Code; status != http.StatusFound {
+		t.Errorf("handler returned wrong status code: got %v want %v", status, http.StatusFound)
 	}
 
 	// Check that the response body contains the expected information about the application
-	expected := `{"name":"My Application","version":"1.0"}`
-	if rr.Body.String() != expected {
-		t.Errorf("handler returned unexpected body: got %v want %v", rr.Body.String(), expected)
-	}
+
 }
-*/
 
 func TestRegisterHandler(t *testing.T) {
 	// create a new router instance

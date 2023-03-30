@@ -5,7 +5,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
-	"os"
 
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
@@ -28,6 +27,7 @@ func requireLogin(next http.HandlerFunc) http.HandlerFunc {
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("*****indexHandler running*****")
+	w.WriteHeader(http.StatusOK)
 	fmt.Printf("home page")
 }
 
@@ -52,7 +52,7 @@ func loginHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("Username: ", credentials.Username)
 	fmt.Println("Password: ", credentials.Password)
 
-	uri := os.Getenv("MONGODB_URI")
+	uri := "mongodb+srv://project_group_5:XbDuA0Vid6BnuRY7@cluster0.5ch00jt.mongodb.net/?retryWrites=true&w=majority" //os.Getenv("MONGODB_URI")
 
 	client, err := mongo.Connect(context.TODO(), options.Client().ApplyURI(uri))
 
