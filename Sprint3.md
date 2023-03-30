@@ -80,3 +80,19 @@ Backend tests can be found in unit_tests.go in the main folder
 
 Tests see if expected output is returned based on input e.g. login should return http.StatusOK.
 Currently tests are now completely working because the issue with mongodb has been resolved
+
+## FRONTEND:
+
+## Accomplished: 
+- Accomplished proper routing between pages
+- Created separate home page that the site is automatically routed to upon initialization, if 
+a nonexistent page is attempted to be accessed it also routes to the home page
+- Login component and home components
+- Add Event modal properly displayed above the rest of the website
+
+## In Progress:
+- Establishing better page navigation and allowing more manipulation of the actual calendar
+- Establishing connection to backend and addEvent() method
+
+## Frontend Tests
+- Frontend tests can be found in the spec.ts files of the various components
