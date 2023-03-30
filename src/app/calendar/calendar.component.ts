@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { CalendarOptions } from '@fullcalendar/core'; // useful for typechecking
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
-
 @Component({
   selector: 'app-root',
   templateUrl: './calendar.component.html',
@@ -11,9 +10,9 @@ export class CalendarComponent implements OnInit{
   modalRef?: BsModalRef;
   title: any;
   events: any = [
-    {title: 'Meeting', date: '2023-02-02', color: '#00FF00'},
-    {title: 'Meeting', date: '2023-02-11', color: '#FF0000'},
-    {title: 'Meeting', date: '2023-02-25', color: '#0000FF'}
+    {title: 'Meeting', date: '2023-03-02', color: '#00FF00'},
+    {title: 'Meeting', date: '2023-03-11', color: '#FF0000'},
+    {title: 'Meeting', date: '2023-03-25', color: '#0000FF'}
   ];
   calendarOptions: CalendarOptions = {
     initialView: 'dayGridMonth',
@@ -22,6 +21,7 @@ export class CalendarComponent implements OnInit{
     events: this.events,
     eventClick: this.handleDateClick.bind(this)
   };
+  
 
   config = {
     animated: true

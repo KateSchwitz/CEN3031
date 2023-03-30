@@ -22,8 +22,10 @@ export class AppComponent implements OnInit{
     initialView: 'dayGridMonth',
     editable: true,
     selectable: true,
-    events: this.events
-
+    events: this.events,
+    select: function(start){
+      console.log(start);
+    }
   };
 
   modalRef?: BsModalRef;
@@ -46,11 +48,7 @@ export class AppComponent implements OnInit{
     this.modalRef?.hide();
   }
 
-  //this doesn't work yet, could be useful though
-  loginPage(){
-    window.location.href = "loginPage.component.html";
 
-  }
 
     
 }

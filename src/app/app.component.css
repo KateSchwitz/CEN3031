@@ -1,6 +1,7 @@
+
 /* The sidebar menu */
 .sidenav {
-   /*height: 100%; /* Full-height: remove this if you want "auto" height */
+    /*height: 100%; Full-height: remove this if you want "auto" height */
     width: 160px; /* Set the width of the sidebar */
     position: fixed; /* Fixed Sidebar (stay in place on scroll) */
     z-index: 1; /* Stay on top */
@@ -13,54 +14,73 @@
   
   /* The navigation menu links */
   .sidenav a {
-    padding: 6px 8px 6px 16px;
+    text-align: center;
     text-decoration: none;
     font-size: 25px;
-    color: #818181;
+    font-family: 'Gill Sans';
+    color: #04182e;
     display: block;
   }
   
   /* When you mouse over the navigation links, change their color */
   .sidenav a:hover {
-    color: #f1f1f1;
+    color: #42587f;
   }
   .sidenav p{
     color: #f1f1f1;
     font-size: 40px;
+    font-family: 'Gill Sans';
     padding-left: 20px;
   }
-
-  .sidenav button{
-    color: #42587f;
-    font-size: 18px;
-    background-color: #f1f1f1;
+  
+  .sidenav a.title{
+    color:#f1f1f1;
+    font-size: 40px;
+    font-family: 'Gill Sans';
+    text-align: left;
+    padding-left: 25px;
   }
-
   .fc{
-    padding-left: 160px;
+    padding-left: 200px;
   }
 
   .button {
-    box-shadow: inset 0 1px 0 0 #ffffff;
-    background: #ffffff linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%);
-    border-radius: 6px;
+    
+    background:#bddbfa;
+    
     border: 1px solid #dcdcdc;
+    border-radius: 4px;
     display: inline-block;
     cursor: pointer;
-    color: #666666;
-    font-family: Arial, sans-serif;
-    font-size: 20px;
+    color: #16075a;
+    font-size: 16px;
     font-weight: bold;
-    padding: 6px 24px;
+    font-family: 'Gill Sans';
+    padding: 6px 6px;
     text-decoration: none;
-    text-shadow: 0 1px 0 #ffffff;
     outline: 0;
+
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 .activebutton {
-  box-shadow: inset 0 1px 0 0 #dcecfb;
-  background: #bddbfa linear-gradient(to bottom, #bddbfa 5%, #80b5ea 100%);
+  
+  background: #8ec3f9;
   border: 1px solid #84bbf3;
   color: #ffffff;
-  text-shadow: 0 1px 0 #528ecc;
+}
+
+.fc-col-header-cell-cushion {
+  display: inline-block;
+  padding: 2px 4px;
+  color: #16075a;
+  font-family: 'Gill Sans';
+}
+
+.fc-title{
+  color: #16075a;
+  font-family: 'Gill Sans';
 }

@@ -2,7 +2,7 @@
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import {FormsModule} from '@angular/forms';
 //Angular Routing
 import { RouterModule } from '@angular/router';
 import { Routes } from '@angular/router';
@@ -24,6 +24,8 @@ import { ModalModule, BsModalService } from 'ngx-bootstrap/modal';
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full'},
+  {path: 'login', component:LoginPageComponent},
+  {path: 'calendar', component:CalendarComponent}
 ]
 
 @NgModule({
