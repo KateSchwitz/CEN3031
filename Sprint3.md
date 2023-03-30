@@ -59,6 +59,12 @@ This endpoint is used to add an event to the database collection using a POST re
 ### Response
 If the insertion attempt is successful, the server responds with a status code of '200 OK'.
 
+## 'GET /clearEvents'
+This endpoint is used to clear the database collection used for events. Its intended use is for testing purposes.
+
+### Response
+If the collection is successfully cleared, the server responds with a status code of '200 OK'.
+
 # Backend Tests
 Backend tests can be found in unit_tests.go in the main folder
 
