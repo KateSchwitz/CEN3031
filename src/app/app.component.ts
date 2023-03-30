@@ -28,13 +28,6 @@ export class AppComponent implements OnInit{
     }
   };
 
-  modalRef?: BsModalRef;
-  constructor(private modalService: BsModalService, private httpClient: HttpClient) {}
-
-  openModal(template: TemplateRef<any>) {
-     this.modalRef = this.modalService.show(template);
-  }
-
   ngOnInit(): void {
   }
 
@@ -45,7 +38,6 @@ export class AppComponent implements OnInit{
     var event_sDate= document.getElementById("event_sDate");
     let obj1:EventInput ={title: "tests", date: '2023-02-28', color: '#33EF88'};
     this.events.push(obj1);
-    this.modalRef?.hide();
   }
 
 

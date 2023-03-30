@@ -7,7 +7,6 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
   styleUrls: ['./calendar.component.css']
 })
 export class CalendarComponent implements OnInit{
-  modalRef?: BsModalRef;
   title: any;
   events: any = [
     {title: 'Meeting', date: '2023-03-02', color: '#00FF00'},
@@ -42,7 +41,6 @@ export class CalendarComponent implements OnInit{
     console.log(arg.event._def.title);
     this.title = arg.event._def.title;
     this.start = arg.event.start;
-    this.modalRef = this.modalService.show(this.template, this.config);
   }
 
   
