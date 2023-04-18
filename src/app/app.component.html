@@ -20,18 +20,17 @@
   </div>
 </div>
 
-<div class="sidenav">
+<div >
+<div class="nav">
   <a class ="title" routerLink='home'>Free Time</a>
     
  <br>
   <a class= "button" routerLink='login' routerLinkActive="activebutton" ariaCurrentWhenActive="page">Login</a>
-  <a class= "button" routerLink='home' routerLinkActive="activebutton" ariaCurrentWhenActive="page">Home</a>
+  <a class= "button" routerLink='home' routerLinkActive="activebutton" ariaCurrentWhenActive="page" >Home</a>
 
  <!--<button type="button" class="btn btn-primary" (click)="openModal(template)">New Event</button> 
   <button type="button" class="btn btn-test" (click)="addEvent()">Add Event test</button>
   <button type="button" class="btn btn-login" (click)="loginPage()">Login test</button>-->
-
-  <router-outlet></router-outlet>
 </div>
   <!-- THIS IS THE LOGIN PAGE COMPONENT
   <div>
@@ -43,7 +42,6 @@
 
 </div>
 -->
+<router-outlet></router-outlet>
 
-<!-- Full Calendar-->
-<full-calendar [options]="calendarOptions"></full-calendar>
-
+</div>  

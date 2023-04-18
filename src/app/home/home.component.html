@@ -1,12 +1,14 @@
 
-<h1>Hello</h1>
-<p>Home Works!!</p>
+  <div class="parent">
+  <div class = "child">
+  <button type="button" class="btn btn-primary" (click)="openModal(template)">New Event</button>
+  </div>
+<!-- Full Calendar-->
+<div class = "child" style="flex-grow: 8">
+<full-calendar [options]="calendarOptions"></full-calendar>
+</div>
 
-
-
-<button type="button" class="btn btn-primary" (click)="openModal(template)">New Event</button>
-
-
+</div>
 
 
 <ng-template #template>

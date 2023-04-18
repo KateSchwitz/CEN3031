@@ -1,9 +1,12 @@
 
+<div class="body">
+
+
 <h2>Login</h2>
-<br>
 
 
-<form (ngSubmit)="onSubmit()">
+
+<form (ngSubmit)="onSubmit()" >
 <label>Username:</label>
 <br> 
 <input name = "username" type = "text" value = "" />
@@ -15,8 +18,10 @@
 <br>
 
 <button type = "submit">Login</button>
-
+<br>
+<button title="save" (click)="save()">Save</button>
 </form>
 
 
-<button title="save" (click)="save()">Save</button>
+
+</div>
