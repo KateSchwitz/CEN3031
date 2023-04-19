@@ -64,7 +64,7 @@
     border-radius: 4px;
     display: inline-block;
     cursor: pointer;
-    color: #16075a;
+    color: #ff1111;
     font-size: 16px;
     font-weight: bold;
     font-family: 'Gill Sans';
@@ -88,11 +88,11 @@
 .fc-col-header-cell-cushion {
   display: inline-block;
   padding: 2px 4px;
-  color: #16075a;
+  color: #ff1111;
   font-family: 'Gill Sans';
 }
 
 .fc-title{
-  color: #16075a;
+  color: #ff1111;
   font-family: 'Gill Sans';
 }
