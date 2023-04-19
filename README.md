@@ -52,108 +52,18 @@ go run main.go
 ```
 You should recieve confirmation that a connection to the database has been made and that a server has successfully launched on localhost:8080
 
-# Backend Setup
-## Installing Packages
+# Frontend Setup
+## Installed packages:
+Angular:
+npm install @angular/core
+npm i @angular/platform-browser
 
-In the event that main.go will not run because of the packages listed in the import section, delete "go.sum" and run the following commands in terminal while in the project directory:
+Styling:
+npm install ngx-bootstrap --save
 
-```
-go get go.mongodb.org/mongo-driver/mongo
-go get go.mongodb.org/mongo-driver/bson
-go get github.com/joho/godotenv
-```
+FullCalendar:
+npm i fullcalendar
+npm install @fullcalendar/interaction
 
-## Gaining server credentials
-
-To prevent anyone from forking the repo and gaining access to the server a .env file has been seperated and shared with the emails of contributors and can be accessed from this link:
-
-```
-https://drive.google.com/file/d/1gr3HSneNz5pxcidbdzGAvTGrjfwwbZTf/view?usp=sharing
-```
-
-Download and unzip the folder and place the .env file in the same folder as main.go. If the .env file is not visible, look online on how to view hidden files on your respective os (mac, windows10).
-
-## Whitelisting IP Address
-
-Send me (Gabe) your IP address or attempt to run main.go and form a connection with the database. From there I (Gabe) can manually whitelist an IP address when necessary.
-
-## Running the application
-
-navigate to the folder that contains main.go in your terminal and run the snippet:
-
-```
-go run main.go
-```
-You should recieve confirmation that a connection to the database has been made and that a server has successfully launched on localhost:8080
-
-# Backend Setup
-## Installing Packages
-
-In the event that main.go will not run because of the packages listed in the import section, delete "go.sum" and run the following commands in terminal while in the project directory:
-
-```
-go get go.mongodb.org/mongo-driver/mongo
-go get go.mongodb.org/mongo-driver/bson
-go get github.com/joho/godotenv
-
-go get golang.org/x/crypto/bcrypt
-```
-
-## Gaining server credentials
-
-To prevent anyone from forking the repo and gaining access to the server a .env file has been seperated and shared with the emails of contributors and can be accessed from this link:
-
-```
-https://drive.google.com/file/d/1gr3HSneNz5pxcidbdzGAvTGrjfwwbZTf/view?usp=sharing
-```
-
-Download and unzip the folder and place the .env file in the same folder as main.go. If the .env file is not visible, look online on how to view hidden files on your respective os (mac, windows10).
-
-## Whitelisting IP Address
-
-Send me (Gabe) your IP address or attempt to run main.go and form a connection with the database. From there I (Gabe) can manually whitelist an IP address when necessary.
-
-## Running the application
-
-navigate to the folder that contains main.go in your terminal and run the snippet:
-
-```
-go run *.go
-```
-You should recieve confirmation that a connection to the database has been made and that a server has successfully launched on localhost:8080
-
-# Backend Setup
-## Installing Packages
-
-In the event that main.go will not run because of the packages listed in the import section, delete "go.sum" and run the following commands in terminal while in the project directory:
-
-```
-go get go.mongodb.org/mongo-driver/mongo
-go get go.mongodb.org/mongo-driver/bson
-go get github.com/joho/godotenv
-
-go get golang.org/x/crypto/bcrypt
-```
-
-## Gaining server credentials
-
-To prevent anyone from forking the repo and gaining access to the server a .env file has been seperated and shared with the emails of contributors and can be accessed from this link:
-
-```
-https://drive.google.com/file/d/1gr3HSneNz5pxcidbdzGAvTGrjfwwbZTf/view?usp=sharing
-```
-
-Download and unzip the folder and place the .env file in the same folder as main.go. If the .env file is not visible, look online on how to view hidden files on your respective os (mac, windows10).
-
-## Whitelisting IP Address
-
-Send me (Gabe) your IP address or attempt to run main.go and form a connection with the database. From there I (Gabe) can manually whitelist an IP address when necessary.
-
-## Running the application
-
-navigate to the folder that contains main.go in your terminal and run the command:
-
-```
-go run main.go
-```
-You should recieve confirmation that a connection to the database has been made and that a server has successfully launched on localhost:8080
+## Running the application:
+opening the terminal and typing ng serve will provide a local host link on which the webpage is displayed (normally "** Angular Live Development Server is listening on localhost:4200, open your browser on http://localhost:4200/ **")
