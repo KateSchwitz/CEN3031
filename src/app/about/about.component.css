@@ -2,10 +2,19 @@ h2{
     font-family: 'Trebuchet';
     font-size: 30px;
     text-align: center;
+    background-color: #f1f1f1;
+
 }
 
 p{
     font-family: 'Trebuchet';
     font-size: 20px;
     text-align: center;
+    background-color: #f1f1f1;
+
+}
+
+body{
+    background-color: #f1f1f1;
+
 }

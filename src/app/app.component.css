@@ -1,4 +1,7 @@
-
+.body{
+  background-color: #f1f1f1;
+  height: 100%;
+}
 /* The sidebar menu */
 .nav {
     /*height: 100%; Full-height: remove this if you want "auto" height */
