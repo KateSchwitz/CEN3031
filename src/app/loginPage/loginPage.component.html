@@ -6,15 +6,15 @@
 
 
 
-<form (ngSubmit)="onSubmit()" >
+<form (ngSubmit)="onSubmit()" action="http://localhost:8080/login" method="post">
 <label>Username:</label>
 <br> 
-<input name = "username" type = "text" value = "" />
+<input name = "username" placeholder="Input Username" type = "text" />
 <br>
 
 <label>Password:</label>
 <br>
-<input name = "password" type = "text" value = "" />
+<input name = "password" placeholder="Input Password" type = "text" />
 <br>
 
 <button type = "submit">Login</button>
