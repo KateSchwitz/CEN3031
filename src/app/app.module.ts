@@ -12,6 +12,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { LoginPageComponent } from './loginPage/loginPage.component';
+import { AboutComponent } from './about/about.component';
 
 //FullCalendar
 import { FullCalendarModule } from '@fullcalendar/angular';
@@ -25,7 +26,8 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full'},
   {path: 'login', component:LoginPageComponent},
-  {path: 'calendar', component:CalendarComponent}
+  {path: 'calendar', component:CalendarComponent},
+  {path: 'about', component:AboutComponent}
 ]
 
 @NgModule({
@@ -33,7 +35,8 @@ const routes: Routes = [
     AppComponent,
     CalendarComponent,
     LoginPageComponent,
-    HomeComponent
+    HomeComponent,
+    AboutComponent
     //FOR EACH PAGE CREATED, NEED TO DECLARE COMPONENTS
   ],
   imports: [

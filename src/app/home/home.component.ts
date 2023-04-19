@@ -3,6 +3,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { CalendarOptions, EventInput } from '@fullcalendar/core'; // useful for typechecking
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-home',
@@ -12,7 +13,9 @@ import interactionPlugin from '@fullcalendar/interaction';
 export class HomeComponent implements OnInit{
   constructor(private modalService: BsModalService) {}
   modalRef?: BsModalRef;
-  events:EventInput[] =[];
+  events:EventInput[] =[
+    
+  ];
   calendarOptions: CalendarOptions = {
     plugins: [
       interactionPlugin,
@@ -32,6 +35,13 @@ export class HomeComponent implements OnInit{
   }
   addEvent(){
     //requires logic here to link back and front end
+    var event_name= document.getElementById("event_title")?.title;
+    var event_color= document.getElementById("event_color");
+    var event_sDate= document.getElementById("event_sDate");
+    let obj1:EventInput ={title: "tests", date: '2023-02-28', color: '#33EF88'};
+    let obj2:EventInput ={title: "test", date: '2023-04-10', color: '#ff1111'};
+    this.events.push(obj1);
+      this.events.push(obj2);
       this.modalRef?.hide();
   }
   ngOnInit() {
