@@ -1,19 +1,24 @@
 
 /* The sidebar menu */
-.sidenav {
+.nav {
     /*height: 100%; Full-height: remove this if you want "auto" height */
-    width: 160px; /* Set the width of the sidebar */
-    position: fixed; /* Fixed Sidebar (stay in place on scroll) */
-    z-index: 1; /* Stay on top */
-    top: 0; /* Stay at the top */
-    left: 0;
+    /*width: 160px; /* Set the width of the sidebar */
+    position: sticky; /* Fixed Sidebar (stay in place on scroll) */
+    /*z-index: 1; /* Stay on top */
+    top: -90; /* Stay at the top */
+    width: 100%;
     background-color: #42587f; /* Black */
-    overflow-x: hidden; /* Disable horizontal scroll */
-    padding-top: 20px;
+    display: flex;
+    /*overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 15px;
+    align-items: center;
+    height: 100px;
+    padding-bottom: 25px;
+    /*transition: top 0.3s;*/
   }
   
   /* The navigation menu links */
-  .sidenav a {
+  .nav a {
     text-align: center;
     text-decoration: none;
     font-size: 25px;
@@ -23,32 +28,35 @@
   }
   
   /* When you mouse over the navigation links, change their color */
-  .sidenav a:hover {
-    color: #42587f;
+  .nav a:hover {
+    color: #f1f1f1;
   }
-  .sidenav p{
+  .nav p{
     color: #f1f1f1;
     font-size: 40px;
     font-family: 'Gill Sans';
     padding-left: 20px;
   }
   
-  .sidenav a.title{
+  .nav a.title{
     color:#f1f1f1;
-    font-size: 40px;
+    font-size: 50px;
     font-family: 'Gill Sans';
     text-align: left;
     padding-left: 25px;
+    padding-right: 25px;
   }
   .fc{
     padding-left: 200px;
+    z-index: -1;
   }
 
+  
   .button {
     
-    background:#bddbfa;
+    background:#42587f;
     
-    border: 1px solid #dcdcdc;
+    border: 0px solid #dcdcdc;
     border-radius: 4px;
     display: inline-block;
     cursor: pointer;
@@ -56,7 +64,7 @@
     font-size: 16px;
     font-weight: bold;
     font-family: 'Gill Sans';
-    padding: 6px 6px;
+    padding: 6px 6px 6px 6px;
     text-decoration: none;
     outline: 0;
 
