@@ -17,12 +17,7 @@ export class HomeComponent implements OnInit{
   events: EventInput[] = [{title: "Meeting", date: '2023-04-20', color: '#33EF88'}];
   
   createEvent(startDate, title, color) {
-    const event = {
-      title: title,
-      date: startDate,
-      color: color
-      //allDay: endDate ? endDate : true // If there's no end date, the event will be all day of start date
-    }
+    let event:EventInput ={title: title, date: startDate, color: color};
   
     this.events.push(event);
   }
@@ -54,13 +49,18 @@ export class HomeComponent implements OnInit{
     var event_name= document.getElementById("event_title")?.title;
     var event_color= document.getElementById("event_color");
     var event_sDate= document.getElementById("event_sDate");
-    let obj1:EventInput ={title: "tests", date: '2023-02-28', color: '#33EF88'};
-    let obj2:EventInput ={title: "test", date: '2023-04-13', color: '#ff1111'};
+
+    //when implemented, change out for {title: event_name, date: event_sdate, color: event_color}
+    let obj1:EventInput ={title: 'Important stuff', date: '2023-04-01', color: '#8c8c22'};
+    let obj2:EventInput ={title: "Testing 123", date: '2023-04-13', color: '#ff1111'};
     this.events.push(obj1);
-      this.events.push(obj2);
-      this.modalRef?.hide();
-    alert(this.events.length)
+    this.events.push(obj2);
+    this.modalRef?.hide();
+    alert('Events array has ' + this.events.length + ' entries: (click okay to cycle through)' )
+    for(let i = 0;i < this.events.length; i++){
+      alert('Title: ' + this.events.at(i)?.title + '\n Date: ' + this.events.at(i)?.date + '\n Color: ' + this.events.at(i)?.color)
     }
+  }
   
   ngOnInit() {
     
