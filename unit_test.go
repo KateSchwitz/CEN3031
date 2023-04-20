@@ -129,3 +129,21 @@ func TestDeleteEvent(t *testing.T) {
 	}
 
 }
+
+func TestEditEvent(t *testing.T) {
+	reqBody := []byte(`{"title":"Unit Test","color":"Blue","start_date":"02.01.02","end_date":"02.01.02"}`)
+	req, err := http.NewRequest("PUT", "/editEvent", bytes.NewBuffer(reqBody))
+	if err != nil {
+		t.Fatal(err)
+	}
+	rr := httptest.NewRecorder()
+
+	handler := http.HandlerFunc(editEventHandler)
+
+	handler.ServeHTTP(rr, req)
+
+	if rr.Code != http.StatusOK {
+		t.Errorf("expected status %d but got %d", http.StatusOK, rr.Code)
+	}
+
+}
