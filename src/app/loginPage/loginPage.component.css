@@ -1,0 +1,33 @@
+h2{
+    color: #081326;
+    font-size: 40px;
+    font-family: 'Gill Sans';
+    padding-left: 650px;
+    padding-top:100px;
+
+}
+
+label{
+    color:#081326;
+    font-family: 'Gill Sans';
+    font-size: 20px;
+    padding-left: 650px;
+    
+}
+input{
+    width: 200px;
+    margin-left: 650px;
+}
+button{
+    background-color: #081326;
+    color: #ffffff;
+    width: 200px;
+    margin-top: 5px;
+    margin-left: 650px;
+    
+}
+
+body{
+    margin-bottom: 200px;
+    background-color: #f1f1f1;
+}

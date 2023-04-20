@@ -1,0 +1,20 @@
+h2{
+    font-family: 'Trebuchet';
+    font-size: 40px;
+    text-align: center;
+    background-color: #f1f1f1;
+    margin-top: 30px;
+
+}
+
+p{
+    font-family: 'Trebuchet';
+    font-size: 30px;
+    text-align: center;
+    background-color: #f1f1f1;
+    margin-top: 5px;
+}
+
+body{
+    background-color: #f1f1f1;
+}

@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, VERSION } from '@angular/core';
 import { CalendarOptions, EventInput } from '@fullcalendar/core'; // useful for typechecking
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import {OnInit, TemplateRef } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { HttpClient } from '@angular/common/http'
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
-  title = 'FreeTime calendar';
+  title = 'FreeTime Calendar';
   events:EventInput[] =[];
   calendarOptions: CalendarOptions = {
     plugins: [
@@ -21,11 +22,14 @@ export class AppComponent implements OnInit{
     initialView: 'dayGridMonth',
     editable: true,
     selectable: true,
-    events: this.events
+    events: this.events,
+    select: function(start){
+      console.log(start);
+    }
   };
-  
+
   modalRef?: BsModalRef;
-  constructor(private modalService: BsModalService) {}
+  constructor(private modalService: BsModalService, private httpClient: HttpClient) {}
 
   openModal(template: TemplateRef<any>) {
      this.modalRef = this.modalService.show(template);
@@ -44,11 +48,7 @@ export class AppComponent implements OnInit{
     this.modalRef?.hide();
   }
 
-  //this doesn't work yet, could be useful though
-  loginPage(){
-    window.location.href = "loginPage.component.html";
 
-  }
 
     
 }
