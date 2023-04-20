@@ -51,15 +51,16 @@ You should recieve confirmation that a connection to the database has been made 
 # Frontend Setup
 ## Installed packages:
 Angular:
-npm install @angular/core
-npm i @angular/platform-browser
+• npm install -g @angular/cli
+• npm install @angular/core
+• npm i @angular/platform-browser
 
 Styling:
-npm install ngx-bootstrap --save
+• npm install ngx-bootstrap --save
 
 FullCalendar:
-npm i fullcalendar
-npm install @fullcalendar/interaction
+• npm i fullcalendar
+• npm install @fullcalendar/interaction
 
 ## Running the application:
 opening the terminal and typing ng serve will provide a local host link on which the webpage is displayed (normally "** Angular Live Development Server is listening on localhost:4200, open your browser on http://localhost:4200/ **")
