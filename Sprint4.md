@@ -12,6 +12,18 @@
 ## Testing:
   - Unit tests are found in the .spec.ts of each _.component file
   - Cypress tests are found in the .cy.ts of each _.component file
+  - (NEW UNIT TEST) About.component.spec.ts: Imports ComponentFixture and TestBed while using the Jasmine Testing framework through the Karma tool. 
+      - The beforeEach function in the describe function uses TestBed to create an Angular Testing module and make an instance of the About Component.
+      - The compileComponents function compiles all of the component's template and styles.
+      - The createComponent function creates an instance of the component inside a ComponentFixture wrapper.
+      - The "it" funtion is where the test is written to check if the component was created. The function also checks that the component is not null or undefined.
+      - If all conditions are met, the test passes.
+  - (PRIOR UNIT TESTS) for other .component.spec.ts files worked the same: (LoginPage.component.ts, Home.component.ts, Calendar.component.ts).
+  - The app.component.spec.ts has three tests. 
+      - The first checks if the AppComponent was created and is not null or undefined. 
+      - The second checks that the title of the AppComponent was set to "calendar".
+      - The third checks if the title was rendered correctly using the "fixture" variable.
+  - loginPage.component.cy.ts groups related tests for the component together and checks if the component mounts correctly (a Cypress command to test in a controlled environment).
 
 # BACKEND
 ## Accomplished:
