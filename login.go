@@ -6,6 +6,8 @@ import (
 	"fmt"
 	"net/http"
 
+	"log"
+
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
@@ -108,4 +110,41 @@ func logoutHandler(w http.ResponseWriter, r *http.Request) {
 	session.Save(r, w)
 
 	http.Redirect(w, r, "/login", http.StatusFound)
+}
+
+func deleteAccountHandler(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodDelete {
+		http.Error(w, "Invalid request method - not delete", http.StatusMethodNotAllowed)
+		return
+	}
+	var credentials struct {
+		Username string "json:'username'"
+		Password string "json:'password'"
+	}
+	if err := json.NewDecoder(r.Body).Decode(&credentials); err != nil {
+		http.Error(w, "Invalid request body", http.StatusBadRequest)
+		return
+	}
+	uri := "mongodb+srv://project_group_5:XbDuA0Vid6BnuRY7@cluster0.5ch00jt.mongodb.net/?retryWrites=true&w=majority" //os.Getenv("MONGODB_URI")
+
+	client, err := mongo.Connect(context.TODO(), options.Client().ApplyURI(uri))
+	if err != nil {
+		panic(err)
+	}
+
+	usersCollection := client.Database("testing").Collection("users")
+
+	filter := bson.D{{"username", credentials.Username}}
+
+	result, err := usersCollection.DeleteOne(context.Background(), filter)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	if result.DeletedCount == 1 {
+		w.WriteHeader(http.StatusNoContent)
+	} else {
+		w.WriteHeader(http.StatusNotFound)
+	}
+
 }
