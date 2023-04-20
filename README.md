@@ -57,3 +57,5 @@ npm install @fullcalendar/interaction
 
 ## Running the application:
 opening the terminal and typing ng serve will provide a local host link on which the webpage is displayed (normally "** Angular Live Development Server is listening on localhost:4200, open your browser on http://localhost:4200/ **")
+
+Additionally, to test the Login component, make sure you have the Backend running through a server hosted on localhost:8080. The Login component sends the user's form input to the backend as a JSON file to verify the username and password. This feature will only work if both are running at once.
