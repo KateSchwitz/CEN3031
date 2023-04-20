@@ -65,6 +65,24 @@ This endpoint is used to edit a pre existing event. Requires the new event be in
 ### Response
 If the update is successful, the server responds with status code of '200 OK'. Otherwise, responds with status code '404 NOT FOUND'
 
+## 'GET /clearFreeTime'
+This endpoint is used to clear the database collection used for free time. Its intended use is for testing purposes.
+
+### Response
+If the collection is successfully cleared, the server responds with a status code of '200 OK'.
+
+## 'POST /addFreeTime'
+This endpoint is used to add an event to the database collection using a POST request with a raw body.
+
+### Request Parameters
+|Parameter|type|Required|Description|
+|---|---|---|---|
+|'start_date'|string|yes|The start date of the event ("YYYY-MM-DDTHH:MM")|
+|'end_date'|string|yes|The end date of the event ("YYYY-MM-DDTHH:MM")|
+
+### Response
+If the insertion attempt is successful, the server responds with a status code of '200 OK'.
+
 # FROM SPRINT 3 AND PRIOR
 
 ## 'DELETE /deleteEvent'
