@@ -174,7 +174,7 @@ func deleteEventHandler(w http.ResponseWriter, r *http.Request) {
 
 	usersCollection := client.Database("testing").Collection("events")
 
-	filter := bson.D{{"eventname", event.Title}, {"color", event.Color}, {"dtstart", event.Start_date}, {"dtend", event.Start_date}}
+	filter := bson.D{{"eventname", event.Title}, {"color", event.Color}, {"dtstart", event.Start_date}, {"dtend", event.End_date}}
 
 	result, err := usersCollection.DeleteOne(context.Background(), filter)
 	if err != nil {
@@ -187,4 +187,56 @@ func deleteEventHandler(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusNotFound)
 	}
 
+}
+
+func editEventHandler(w http.ResponseWriter, r *http.Request) {
+	// make sure it is a post request
+	if r.Method != http.MethodPut {
+		http.Error(w, "Invalid request method", http.StatusMethodNotAllowed)
+		println("method not allowed")
+		return
+	}
+
+	// contents of post request
+	var event struct {
+		Title      string "json:'title'"
+		Color      string "json:'color'"
+		Start_date string "json:'start_date'"
+		End_date   string "json:'end_date'"
+	}
+	update := bson.D{{"$set", bson.D{
+		{"eventname", event.Title},
+		{"color", event.Color},
+		{"dtstart", event.Start_date},
+		{"dtend", event.End_date},
+	}}}
+
+	if err := json.NewDecoder(r.Body).Decode(&event); err != nil {
+		http.Error(w, "Invalid request body", http.StatusBadRequest)
+		println("bad request")
+		return
+	}
+
+	uri := "mongodb+srv://project_group_5:XbDuA0Vid6BnuRY7@cluster0.5ch00jt.mongodb.net/?retryWrites=true&w=majority" //os.Getenv("MONGODB_URI")
+
+	client, err := mongo.Connect(context.TODO(), options.Client().ApplyURI(uri))
+	if err != nil {
+		panic(err)
+	}
+
+	usersCollection := client.Database("testing").Collection("events")
+
+	filter1 := bson.D{{"eventname", event.Title}}
+
+	result1, err := usersCollection.UpdateOne(context.TODO(), filter1, update)
+
+	filter2 := bson.D{{"color", event.Color}}
+
+	result2, err := usersCollection.UpdateOne(context.TODO(), filter2, update)
+
+	if result1.MatchedCount == 1 || result2.MatchedCount == 1 {
+		w.WriteHeader(http.StatusOK)
+	} else {
+		w.WriteHeader(http.StatusNotFound)
+	}
 }
