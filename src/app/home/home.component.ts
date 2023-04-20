@@ -51,9 +51,9 @@ export class HomeComponent implements OnInit{
     var event_sDate= document.getElementById("event_sDate");
 
     //when implemented, change out for {title: event_name, date: event_sdate, color: event_color}
-    let obj1:EventInput ={title: 'Important stuff', date: '2023-04-01', color: '#8c8c22'};
+    //let obj1:EventInput ={title: 'Important stuff', date: '2023-04-01', color: '#8c8c22'};
     let obj2:EventInput ={title: "Testing 123", date: '2023-04-13', color: '#ff1111'};
-    this.events.push(obj1);
+    //this.events.push(obj1);
     this.events.push(obj2);
     this.modalRef?.hide();
     alert('Events array has ' + this.events.length + ' entries: (click okay to cycle through)' )
