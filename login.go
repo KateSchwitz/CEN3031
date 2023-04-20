@@ -18,10 +18,14 @@ func requireLogin(next http.HandlerFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		session, err := store.Get(r, "session")
 
+		print(session.ID)
 		if err != nil || !session.IsNew {
 			http.Redirect(w, r, "/login", http.StatusFound)
 			return
 		}
+		println(err)
+		println(session.IsNew)
+		println(session.ID)
 
 		next.ServeHTTP(w, r)
 	}
@@ -117,6 +121,7 @@ func deleteAccountHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Invalid request method - not delete", http.StatusMethodNotAllowed)
 		return
 	}
+	println("this ran too")
 	var credentials struct {
 		Username string "json:'username'"
 		Password string "json:'password'"

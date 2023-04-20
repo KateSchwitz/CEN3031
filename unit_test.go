@@ -156,7 +156,7 @@ func TestEditEvent(t *testing.T) {
 }
 
 func TestDeleteUser(t *testing.T) {
-	reqBody := []byte(`{"username":"Testuser3","password":"Testpass123!"}`)
+	reqBody := []byte(`{"username":"Testuser2","password":"Testpass123!"}`)
 	req, err := http.NewRequest("DELETE", "/deleteUser", bytes.NewBuffer(reqBody))
 	if err != nil {
 		t.Fatal(err)
