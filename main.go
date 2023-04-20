@@ -67,6 +67,7 @@ func main() {
 	http.HandleFunc("/addEventRaw", eventHandlerRaw)
 	http.HandleFunc("/clearEvents", clearEvents)
 	http.HandleFunc("/editEvent", editEventHandler)
+	http.HandleFunc("/deleteUser", deleteAccountHandler)
 	//http.HandleFunc("/", indexHandler)
 
 	fmt.Printf("Starting server at port 8080\n")
