@@ -16,9 +16,17 @@ export class CalendarComponent implements OnInit{
     {title: 'Meeting', date: '2023-03-25', color: '#0000FF'}
   ];
   calendarOptions: CalendarOptions = {
+    headerToolbar: {
+      left: 'prev,next today',
+      center: 'title',
+      right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+    },
     initialView: 'dayGridMonth',
+    weekends: true,
     editable: true,
     selectable: true,
+    selectMirror: true,
+    dayMaxEvents: true,
     events: this.events,
     eventClick: this.handleDateClick.bind(this)
   };
@@ -45,7 +53,5 @@ export class CalendarComponent implements OnInit{
     this.start = arg.event.start;
     this.modalRef = this.modalService.show(this.template, this.config);
   }
-
-  
 
 }
