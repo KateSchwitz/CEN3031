@@ -68,7 +68,7 @@ func main() {
 	http.HandleFunc("/clearEvents", clearEvents)
 	http.HandleFunc("/editEvent", editEventHandler)
 	http.HandleFunc("/deleteUser", deleteAccountHandler)
-	//http.HandleFunc("/", indexHandler)
+	http.HandleFunc("/", indexHandler)
 
 	fmt.Printf("Starting server at port 8080\n")
 	if err := http.ListenAndServe(":8080", contextG.ClearHandler(http.DefaultServeMux)); err != nil {

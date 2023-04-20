@@ -37,21 +37,28 @@ func TestAboutEndpoint(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-
 	// Create a new HTTP response recorder
 	rr := httptest.NewRecorder()
 
-	// Set the session cookie in the request to simulate a logged-in user
-	cookie := &http.Cookie{Name: "session", Value: "Gabe"}
-	req.AddCookie(cookie)
+	//create a mock session
+
+	session, _ := store.Get(req, "session")
+	session.Values["user_id"] = "123"
+	session.Save(req, rr)
 
 	// Call the aboutHandler function with the HTTP request and response recorder
 	handler := http.HandlerFunc(requireLogin(indexHandler))
 	handler.ServeHTTP(rr, req)
 
 	// Check that the response status code is 200 OK
-	if status := rr.Code; status != http.StatusFound {
+	if status := rr.Code; status != http.StatusOK {
 		t.Errorf("handler returned wrong status code: got %v want %v", status, http.StatusFound)
+	}
+
+	session.Options.MaxAge = -1
+	err = session.Save(req, rr)
+	if err != nil {
+		panic(err)
 	}
 
 	// Check that the response body contains the expected information about the application
@@ -149,14 +156,19 @@ func TestEditEvent(t *testing.T) {
 }
 
 func TestDeleteUser(t *testing.T) {
-	reqBody := []byte(`{"username":"Testuser4","password":"Testpass123!"}`)
+	reqBody := []byte(`{"username":"Testuser2","password":"Testpass123!"}`)
 	req, err := http.NewRequest("DELETE", "/deleteUser", bytes.NewBuffer(reqBody))
 	if err != nil {
 		t.Fatal(err)
 	}
+
 	rr := httptest.NewRecorder()
 
-	handler := http.HandlerFunc(deleteAccountHandler)
+	session, _ := store.Get(req, "session")
+	session.Values["user_id"] = "123"
+	session.Save(req, rr)
+
+	handler := http.HandlerFunc(requireLogin(deleteAccountHandler))
 
 	handler.ServeHTTP(rr, req)
 
