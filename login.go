@@ -132,7 +132,7 @@ func deleteAccountHandler(w http.ResponseWriter, r *http.Request) {
 		panic(err)
 	}
 
-	usersCollection := client.Database("testing").Collection("users")
+	usersCollection := client.Database("testing").Collection("register")
 
 	filter := bson.D{{"username", credentials.Username}}
 

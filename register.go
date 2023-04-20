@@ -5,7 +5,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
-	"os"
 	"unicode"
 
 	"go.mongodb.org/mongo-driver/bson"
@@ -80,7 +79,7 @@ func registerHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// check if username exists in db already
-	uri := os.Getenv("MONGODB_URI")
+	uri := "mongodb+srv://project_group_5:XbDuA0Vid6BnuRY7@cluster0.5ch00jt.mongodb.net/?retryWrites=true&w=majority" //os.Getenv("MONGODB_URI")
 
 	client, err := mongo.Connect(context.TODO(), options.Client().ApplyURI(uri))
 
