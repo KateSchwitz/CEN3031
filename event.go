@@ -88,9 +88,9 @@ func eventHandler(w http.ResponseWriter, r *http.Request) {
 		panic(err)
 	}
 
-	usersCollection := client.Database("testing").Collection("events")
+	eventsCollection := client.Database("testing").Collection("events")
 
-	insertEvent(usersCollection, newEvent)
+	insertEvent(eventsCollection, newEvent)
 }
 
 // Creates a new event in the Events collection Post request with raw body
@@ -134,9 +134,9 @@ func eventHandlerRaw(w http.ResponseWriter, r *http.Request) {
 		panic(err)
 	}
 
-	usersCollection := client.Database("testing").Collection("events")
+	eventsCollection := client.Database("testing").Collection("events")
 
-	insertEvent(usersCollection, newEvent)
+	insertEvent(eventsCollection, newEvent)
 }
 
 func deleteEventHandler(w http.ResponseWriter, r *http.Request) {
@@ -172,11 +172,11 @@ func deleteEventHandler(w http.ResponseWriter, r *http.Request) {
 		panic(err)
 	}
 
-	usersCollection := client.Database("testing").Collection("events")
+	eventsCollection := client.Database("testing").Collection("events")
 
 	filter := bson.D{{"eventname", event.Title}, {"color", event.Color}, {"dtstart", event.Start_date}, {"dtend", event.End_date}}
 
-	result, err := usersCollection.DeleteOne(context.Background(), filter)
+	result, err := eventsCollection.DeleteOne(context.Background(), filter)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -224,15 +224,15 @@ func editEventHandler(w http.ResponseWriter, r *http.Request) {
 		panic(err)
 	}
 
-	usersCollection := client.Database("testing").Collection("events")
+	eventsCollection := client.Database("testing").Collection("events")
 
 	filter1 := bson.D{{"eventname", event.Title}}
 
-	result1, err := usersCollection.UpdateOne(context.TODO(), filter1, update)
+	result1, err := eventsCollection.UpdateOne(context.TODO(), filter1, update)
 
 	filter2 := bson.D{{"color", event.Color}}
 
-	result2, err := usersCollection.UpdateOne(context.TODO(), filter2, update)
+	result2, err := eventsCollection.UpdateOne(context.TODO(), filter2, update)
 
 	if result1.MatchedCount == 1 || result2.MatchedCount == 1 {
 		w.WriteHeader(http.StatusOK)
