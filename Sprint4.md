@@ -72,7 +72,7 @@ This endpoint is used to clear the database collection used for free time. Its i
 If the collection is successfully cleared, the server responds with a status code of '200 OK'.
 
 ## 'POST /addFreeTime'
-This endpoint is used to add an event to the database collection using a POST request with a raw body.
+This endpoint is used to add an instance of free time to the database collection using a POST request with a form-urlencoded body.
 
 ### Request Parameters
 |Parameter|type|Required|Description|
