@@ -11,34 +11,39 @@ Free Time allows people to collaboratively create a schedule to determine the be
 # Backend Setup
 ## Installing Packages
 
-In the event that main.go will not run because of the packages listed in the import section, delete "go.sum" and run the following commands in terminal while in the project directory:
+In the event that the program will not run because of the packages listed in the import section, import the following packages in your terminal while in the project directory. i.e. run: go get github.com/gorilla/context for each dependency listed.
 
 ```
-go get go.mongodb.org/mongo-driver/mongo
-go get go.mongodb.org/mongo-driver/bson
-go get github.com/joho/godotenv
+"github.com/gorilla/context"
+"github.com/gorilla/sessions"
+"github.com/joho/godotenv"
+"go.mongodb.org/mongo-driver/mongo"
+"go.mongodb.org/mongo-driver/mongo/options"
+"go.mongodb.org/mongo-driver/mongo/readpref"
+"go.mongodb.org/mongo-driver/bson"
+"golang.org/x/crypto/bcrypt"
+
 ```
 
 ## Gaining server credentials
 
-To prevent anyone from forking the repo and gaining access to the server a .env file has been seperated and shared with the emails of contributors and can be accessed from this link:
+Create a file titled '.env' and paste the following two lines in:
 
 ```
-https://drive.google.com/file/d/1gr3HSneNz5pxcidbdzGAvTGrjfwwbZTf/view?usp=sharing
+export MONGODB_URI = "mongodb+srv://project_group_5:XbDuA0Vid6BnuRY7@cluster0.5ch00jt.mongodb.net/?retryWrites=true&w=majority"
+export SESSION_KEY = "av0iweruvggwpervwerifpieu"
 ```
-
-Download and unzip the folder and place the .env file in the same folder as main.go. If the .env file is not visible, look online on how to view hidden files on your respective os (mac, windows10).
 
 ## Whitelisting IP Address
 
-Send me (Gabe) your IP address or attempt to run main.go and form a connection with the database. From there I (Gabe) can manually whitelist an IP address when necessary.
+All IP addresses are whitelisted, meaning access to the database should not be an issue.
 
 ## Running the application
 
-navigate to the folder that contains main.go in your terminal and run the snippet:
+navigate to the folder that contains main.go in your terminal and run the command:
 
 ```
-go run main.go
+go run main.go login.go register.go event.go
 ```
 You should recieve confirmation that a connection to the database has been made and that a server has successfully launched on localhost:8080
 
