@@ -9,6 +9,7 @@ Walter Stahll
 Free Time allows people to collaboratively create a schedule to determine the best "free time" for meetings and gatherings. 
 
 # Backend Setup
+This project was written and run using VS Code's Go extension.
 ## Installing Packages
 
 In the event that the program will not run because of the packages listed in the import section, import the following packages in your terminal while in the project directory. i.e. run: go get github.com/gorilla/context for each dependency listed.
