@@ -147,3 +147,21 @@ func TestEditEvent(t *testing.T) {
 	}
 
 }
+
+func TestDeleteUser(t *testing.T) {
+	reqBody := []byte(`{"username":"Testuser4","password":"Testpass123!"}`)
+	req, err := http.NewRequest("DELETE", "/deleteUser", bytes.NewBuffer(reqBody))
+	if err != nil {
+		t.Fatal(err)
+	}
+	rr := httptest.NewRecorder()
+
+	handler := http.HandlerFunc(deleteAccountHandler)
+
+	handler.ServeHTTP(rr, req)
+
+	if rr.Code != http.StatusNoContent {
+		t.Errorf("expected status %d but got %d", http.StatusNoContent, rr.Code)
+	}
+
+}
